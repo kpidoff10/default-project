@@ -1,17 +1,13 @@
 import { z } from "zod";
 
 export const profileFormSchema = z.object({
-  firstName: z.string().min(2, {
-    message: "Le prénom doit contenir au moins 2 caractères.",
-  }).max(50, {
+  firstName: z.string().max(50, {
     message: "Le prénom ne peut pas dépasser 50 caractères.",
-  }),
-  lastName: z.string().min(2, {
-    message: "Le nom doit contenir au moins 2 caractères.",
-  }).max(50, {
+  }).optional().or(z.literal("")),
+  lastName: z.string().max(50, {
     message: "Le nom ne peut pas dépasser 50 caractères.",
-  }),
-  username: z.string().min(3, {
+  }).optional().or(z.literal("")),
+  name: z.string().min(3, {
     message: "Le nom d'utilisateur doit contenir au moins 3 caractères.",
   }).max(30, {
     message: "Le nom d'utilisateur ne peut pas dépasser 30 caractères.",
@@ -23,7 +19,7 @@ export const profileFormSchema = z.object({
   }),
   bio: z.string().max(500, {
     message: "La bio ne peut pas dépasser 500 caractères.",
-  }).optional(),
+  }).optional().or(z.literal("")),
 });
 
 export type ProfileFormData = z.infer<typeof profileFormSchema>; 

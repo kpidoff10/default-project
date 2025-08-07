@@ -7,6 +7,8 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import bcrypt from "bcryptjs";
 import { prisma } from "./prisma";
 import { serverConfig } from "./config/server-config";
+import { getServerSession } from "next-auth";
+import { UserSession } from "next-auth";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -84,19 +86,26 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async session({ session, user }) {
+      let fullUser = null;
       if (user) {
-        session.user.id = user.id;
-        session.user.role = user.role;
+        // Récupérer l'utilisateur complet depuis la base de données
+        fullUser = await prisma.user.findUnique({
+          where: { id: user.id },
+          select: { id: true, role: true, firstName: true, lastName: true, bio: true }
+        });
+        
+        if (fullUser) {
+          session.user.id = fullUser.id;
+          session.user.role = fullUser.role;
+        }
       }
-      return session;
-    },
-    async jwt({ token, user, account }) {
-      // Ce callback n'est utilisé que si on revient à JWT
-      if (user) {
-        token.role = user.role;
-        token.id = user.id;
-      }
-      return token;
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          ...fullUser,
+        },
+      };
     },
   },
   events: {
@@ -109,4 +118,9 @@ export const authOptions: NextAuthOptions = {
     signIn: "/login",
   },
   secret: serverConfig.auth.secret,
-}; 
+};
+
+export async function getAuthSession() {
+  const session = await getServerSession(authOptions);
+  return session?.user?.id || null;
+} 

@@ -7,23 +7,30 @@ import { ProfileHeader } from "./components/profile-header";
 import { ProfileTabs } from "./components/profile-tabs";
 import { useAuth } from "@/providers/auth-provider";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@/components/ui/button";
+import { Save } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useUpdateProfile } from "@/hooks/use-profile";
+import { useEffect } from "react";
 
 export default function ProfilePage() {
   const { user, isAuthenticated } = useAuth();
-
+  const t = useTranslations("Profile");
+  const updateProfile = useUpdateProfile();
   // Initialiser le formulaire avec les données utilisateur
   const form = useForm<ProfileFormData>({
     resolver: zodResolver(profileFormSchema),
-    defaultValues: {
-      firstName: user?.name?.split(" ")[0] || "",
-      lastName: user?.name?.split(" ").slice(1).join(" ") || "",
-      email: user?.email || "",
-      username: user?.name?.toLowerCase().replace(/\s+/g, "") || "",
-      bio: "",
-    },
+    defaultValues: user as ProfileFormData,
   });
+
+  // Mettre à jour les valeurs du formulaire quand l'utilisateur change
+  useEffect(() => {
+    if (user) {
+      form.reset(user as ProfileFormData);
+    }
+  }, [user, form]);
+
 
   if (!isAuthenticated) {
     return (
@@ -35,14 +42,7 @@ export default function ProfilePage() {
   }
 
   const onSubmit = async (data: ProfileFormData) => {
-    try {
-      // Simulation d'une sauvegarde
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      console.log("Données du formulaire:", data);
-
-    } catch (error) {
-    }
+    updateProfile.mutate(data);
   };
 
   return (
@@ -59,6 +59,21 @@ export default function ProfilePage() {
           <Form {...form}>
             <ProfileTabs />
           </Form>
+        </div>
+
+        {/* Bouton de sauvegarde en bas de page */}
+        <div className="pt-8 border-t">
+          <div className="flex justify-end">
+            <Button
+              onClick={form.handleSubmit(onSubmit)}
+              disabled={updateProfile.isPending || !form.formState.isDirty}
+              isLoading={updateProfile.isPending}
+              size="lg"
+            >
+              <Save className="h-5 w-5 mr-2" />
+              {t("form.saveChanges")}
+            </Button>
+          </div>
         </div>
       </div>
     </div>

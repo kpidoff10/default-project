@@ -51,14 +51,15 @@ model Session {
 
 model User {
   id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
+  name          String
+  firstName     String    @default("")
+  lastName      String    @default("")
+  email         String   @unique
   emailVerified DateTime?
   image         String?
   password      String? // Pour l'authentification email/mot de passe
   role          UserRole  @default(USER)
-  username      String?   @unique // Pour les liens de partage /u/{username}
-  bio           String?
+  bio           String    @default("")
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 

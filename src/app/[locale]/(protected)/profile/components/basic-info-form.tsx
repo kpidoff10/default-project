@@ -16,7 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { Input } from "@/components/ui/input";
+import { FormInput } from "@/components/ui/form-input";
 import { ProfileFormData } from "../schemas/profile-schema";
 import { Textarea } from "@/components/ui/textarea";
 import { useFormContext } from "react-hook-form";
@@ -41,16 +41,11 @@ export function BasicInfoForm() {
             control={form.control}
             name="firstName"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t("basicInfo.firstName")}</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder={t("basicInfo.firstNamePlaceholder")}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
+              <FormInput
+                label={t("basicInfo.firstName")}
+                placeholder={t("basicInfo.firstNamePlaceholder")}
+                {...field}
+              />
             )}
           />
 
@@ -58,16 +53,11 @@ export function BasicInfoForm() {
             control={form.control}
             name="lastName"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t("basicInfo.lastName")}</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder={t("basicInfo.lastNamePlaceholder")}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
+              <FormInput
+                label={t("basicInfo.lastName")}
+                placeholder={t("basicInfo.lastNamePlaceholder")}
+                {...field}
+              />
             )}
           />
         </div>
@@ -76,40 +66,26 @@ export function BasicInfoForm() {
           control={form.control}
           name="email"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel className="flex items-center gap-2">
-                <Mail className="w-4 h-4" />
-                {t("basicInfo.email")}
-              </FormLabel>
-              <FormControl>
-                <Input
-                  type="email"
-                  placeholder={t("basicInfo.emailPlaceholder")}
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
+            <FormInput
+              label={t("basicInfo.email")}
+              placeholder={t("basicInfo.emailPlaceholder")}
+              type="email"
+              required
+              {...field}
+            />
           )}
         />
 
         <FormField
           control={form.control}
-          name="username"
+          name="name"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel className="flex items-center gap-2">
-                <AtSign className="w-4 h-4" />
-                {t("basicInfo.username")}
-              </FormLabel>
-              <FormControl>
-                <Input
-                  placeholder={t("basicInfo.usernamePlaceholder")}
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
+            <FormInput
+              label={t("basicInfo.username")}
+              placeholder={t("basicInfo.usernamePlaceholder")}
+              required
+              {...field}
+            />
           )}
         />
 

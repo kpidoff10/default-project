@@ -1,23 +1,12 @@
 import NextAuth from "next-auth"
+import { User as UserPrisma } from "@prisma/client"
 
 declare module "next-auth" {
   interface Session {
-    user: {
-      id: string
-      email: string
-      name?: string | null
-      image?: string | null
-      role: string
-    }
+    user: User
   }
 
-  interface User {
-    id: string
-    email: string
-    name?: string | null
-    image?: string | null
-    role: string
-  }
+  type UserSession  = Pick<UserPrisma, "id" | "email" | "name" | "image" | "role" | "firstName" | "lastName" | "bio">
 }
 
 declare module "next-auth/jwt" {
