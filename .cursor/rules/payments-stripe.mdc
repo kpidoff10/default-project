@@ -1,0 +1,70 @@
+---
+description: Conventions de développement pour les paiements via Stripe, incluant la gestion des webhooks, la sécurité, le système de parrainage, les avis utilisateurs et les profils créateurs.
+globs:
+  - "src/lib/payments/**/*.{ts,tsx}"
+  - "src/app/api/webhooks/stripe/**/*.{ts,tsx}"
+  - "src/app/api/checkout/**/*.{ts,tsx}"
+  - "src/app/api/referrals/**/*.{ts,tsx}"
+  - "src/app/api/reviews/**/*.{ts,tsx}"
+  - "src/app/api/creators/**/*.{ts,tsx}"
+alwaysApply: true
+---
+# 💳 Règles Paiements et Stripe
+
+## Configuration Stripe
+
+1. **Checkout** pour les paiements uniques
+2. **Webhooks** pour les notifications
+3. **Gestion des commissions** créateurs
+4. **Variables d'environnement** : STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET
+
+## Sécurité
+
+1. **Validation des webhooks** Stripe
+2. **Protection CSRF**
+3. **Headers de sécurité**
+
+## Fonctionnalités spécifiques
+
+### Système de parrainage
+1. **Codes de parrainage** uniques
+2. **Calcul automatique** des commissions
+3. **Suivi des conversions**
+
+### Avis et notes
+1. **Système anonyme**
+2. **Validation des avis** (après achat uniquement)
+3. **Codes promo** de récompense
+
+### Profils créateurs
+1. **Liens de partage** uniques (`/u/{username}`)
+2. **Statistiques de vente**
+3. **Gestion des contenus**
+
+## API Endpoints
+
+### Checkout
+```http
+POST /api/checkout
+```
+
+### Webhooks Stripe
+```http
+POST /api/webhooks/stripe
+```
+
+## Variables d'environnement Stripe
+
+```env
+STRIPE_SECRET_KEY="sk_test_..."
+STRIPE_WEBHOOK_SECRET="whsec_..."
+STRIPE_PUBLISHABLE_KEY="pk_test_..."
+```
+
+STRIPE_SECRET_KEY="sk_test_..."
+STRIPE_WEBHOOK_SECRET="whsec_..."
+STRIPE_PUBLISHABLE_KEY="pk_test_..."
+```
+
+STRIPE_PUBLISHABLE_KEY="pk_test_..."
+```

@@ -1,0 +1,65 @@
+---
+description: Règles pour les tests automatisés, la qualité du code, le logging et la maintenance du projet
+globs: ["src/**/*", "prisma/**/*"]
+alwaysApply: true
+---
+
+# 🧪 Règles Tests et Qualité
+
+## Tests
+
+1. **Jest + React Testing Library**
+2. **Tests des composants** critiques
+3. **Mocks pour les services** externes
+
+## Logging
+
+1. **Logger propre** et désactivable en production
+2. **Variable d'environnement** LOG_LEVEL
+3. **Logs détaillés** pour auth, paiement, upload
+
+## Conventions de code
+
+### Nommage
+1. **PascalCase** pour les composants
+2. **camelCase** pour les variables et fonctions
+3. **kebab-case** pour les fichiers
+
+### Commits
+1. **Conventional commits** (feat, fix, chore, etc.)
+2. **Messages descriptifs** en français
+
+### Documentation
+1. **Commentaires** pour les fonctions complexes
+2. **README** à jour
+3. **Documentation des API**
+
+## Règles de validation
+
+### Avant chaque commit
+1. **Tests passent**
+2. **Code linté**
+3. **Types TypeScript** valides
+4. **Pas de console.log** en production
+
+### Avant déploiement
+1. **Variables d'environnement** configurées
+2. **Base de données** migrée
+3. **Tests d'intégration** passent
+
+## Support et maintenance
+
+### Monitoring
+1. **Vercel Analytics**
+2. **Sentry** pour les erreurs
+3. **Logs structurés**
+
+### Backup
+1. **Base de données** sauvegardée
+2. **Fichiers R2** sauvegardés
+3. **Configuration** versionnée
+
+### Backup
+1. **Base de données** sauvegardée
+2. **Fichiers R2** sauvegardés
+3. **Configuration** versionnée

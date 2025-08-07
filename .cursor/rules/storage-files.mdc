@@ -1,0 +1,60 @@
+---
+description: Règles de gestion des fichiers, stockage Cloudflare R2, génération de fichiers floutés et endpoints API associés
+globs: ["src/lib/files/**/*", "src/app/api/upload/**/*", "src/app/api/products/**/*"]
+alwaysApply: true
+---
+
+# 📁 Règles Stockage et Fichiers
+
+## Cloudflare R2
+
+1. **Upload des fichiers** vers R2
+2. **Structure** : `users/{userId}/content/` pour les fichiers originaux
+3. **Structure** : `users/{userId}/content/blurred/` pour les fichiers floutés
+4. **Variables d'environnement** requises : R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET_NAME
+
+## Génération de fichiers floutés
+
+1. **Sharp** pour le traitement d'images
+2. **Niveau de flou par défaut** : 20 (échelle 0-100)
+3. **Qualité** : 80%, Format : JPEG
+4. **Génération en arrière-plan** non-bloquante
+
+## Sécurité des fichiers
+
+1. **Validation des types** de fichiers
+2. **Limitation de taille**
+3. **Scan antivirus** (optionnel)
+
+## Structure des fichiers
+
+```
+users/
+├── {userId}/
+│   ├── content/           # Fichiers originaux
+│   │   ├── image1.jpg
+│   │   └── image2.png
+│   └── content/blurred/   # Fichiers floutés
+│       ├── image1_blurred.jpg
+│       └── image2_blurred.png
+```
+
+## API Endpoints
+
+### Générer les fichiers floutés
+```http
+POST /api/products/{productId}/generate-blurred
+```
+
+### Upload de fichiers
+```http
+POST /api/upload/presigned-url
+```
+
+### Upload de fichiers
+```http
+POST /api/upload/presigned-url
+```
+
+POST /api/upload/presigned-url
+```

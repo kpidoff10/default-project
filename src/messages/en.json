@@ -1,0 +1,274 @@
+{
+  "LocaleSwitcher": {
+    "french": "Français",
+    "english": "English"
+  },
+  "Navigation": {
+    "creators": "Creators",
+    "discover": "Discover",
+    "about": "About",
+    "dashboard": "Dashboard",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "profile": "Profile"
+  },
+  "Home": {
+    "title": "Cloaky.me",
+    "description": "Anonymous digital content platform allowing creators to publish and monetize their creations while offering buyers a smooth, secure and confidential experience.",
+    "discoverCreators": "Discover creators",
+    "becomeCreator": "Become a creator"
+  },
+  "Footer": {
+    "description": "Anonymous digital content platform. Share your creations with complete confidentiality.",
+    "quickLogin": "Quick login",
+    "sections": {
+      "product": "Product",
+      "features": "Features",
+      "about": "About",
+      "legal": "Legal",
+      "support": "Support"
+    },
+    "copyright": "Made with",
+    "madeWith": "Made with"
+  },
+  "FooterMenu": {
+    "product": {
+      "products": "Products"
+    },
+    "features": {
+      "features": "Features",
+      "creators": "Creators",
+      "enterprise": "Enterprise"
+    },
+    "about": {
+      "about": "About",
+      "blog": "Blog"
+    },
+    "legal": {
+      "contact": "Contact",
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy",
+      "cookies": "Cookies",
+      "gdpr": "GDPR"
+    },
+    "support": {
+      "help": "Help Center",
+      "support": "Support"
+    }
+  },
+  "Navigation": {
+    "creators": "Creators",
+    "discover": "Discover",
+    "about": "About",
+    "dashboard": "Dashboard",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "profile": "Profile",
+    "products": "Products",
+    "language": "Language",
+    "theme": "Theme"
+  },
+  "AuthMenu": {
+    "upload": "Publish",
+    "myContent": "My Content",
+    "earnings": "Earnings",
+    "admin": "Administration"
+  },
+  "UserMenu": {
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "sessions": "Sessions"
+  },
+  "Profile": {
+    "title": "My Profile",
+    "description": "Manage your personal information and preferences",
+    "form": {
+      "saveChanges": "Save",
+      "cancel": "Cancel",
+      "changesSaved": "Changes saved",
+      "errorSaving": "Error saving changes"
+    },
+    "basicInfo": {
+      "title": "Basic Information",
+      "description": "Your main personal information",
+      "firstName": "First Name",
+      "firstNamePlaceholder": "Your first name",
+      "lastName": "Last Name",
+      "lastNamePlaceholder": "Your last name",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "username": "Username",
+      "usernamePlaceholder": "your-username",
+      "bio": "Bio",
+      "bioPlaceholder": "Tell us about yourself..."
+    },
+    "contactInfo": {
+      "title": "Contact Information",
+      "description": "Your contact information",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com"
+    },
+    "tabs": {
+      "basicInfo": "Information",
+      "contact": "Contact",
+      "notifications": "Notifications",
+      "security": "Security",
+      "preferences": "Preferences"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "description": "Manage your notification preferences",
+      "emailNotifications": {
+        "title": "Email Notifications",
+        "description": "Receive notifications by email",
+        "configure": "Configure"
+      },
+      "pushNotifications": {
+        "title": "Push Notifications",
+        "description": "Receive push notifications in your browser",
+        "configure": "Configure"
+      }
+    },
+    "security": {
+      "title": "Security",
+      "description": "Manage your security settings",
+      "changePassword": {
+        "title": "Change Password",
+        "description": "Update your password",
+        "edit": "Edit"
+      },
+      "activeSessions": {
+        "title": "Active Sessions",
+        "description": "View and manage your connected sessions",
+        "view": "View"
+      }
+    },
+    "header": {
+      "changeCover": "Change Cover",
+      "changePhoto": "Change Photo"
+    }
+  },
+  "AuthPages": {
+    "login": "Login",
+    "register": "Register"
+  },
+  "Emails": {
+    "Welcome": {
+      "title": "Welcome to Cloaky.me, {userFirstName}! 🎉",
+      "subtitle": "We're excited to welcome you to the anonymous digital content platform. You can now start sharing your creations with complete confidentiality.",
+      "verificationRequired": "To start using Cloaky.me, please verify your email address.",
+      "verifyEmail": "Verify my email",
+      "whatYouCanDo": "Here's what you can do now:",
+      "features": {
+        "publish": {
+          "text": "Publish your first content",
+          "description": "Share your creations with complete confidentiality"
+        },
+        "profile": {
+          "text": "Set up your creator profile",
+          "description": "Customize your creator space"
+        },
+        "community": {
+          "text": "Discover the community",
+          "description": "Explore content from other creators"
+        }
+      }
+    },
+    "PasswordReset": {
+      "title": "🔐 Password Reset",
+      "greeting": "Hello {userFirstName},",
+      "description": "You have requested to reset your password. Click the button below to create a new secure password.",
+      "resetPassword": "Reset my password",
+      "security": "Security",
+      "securityDescription": "This link expires in 1 hour for security reasons.",
+      "notRequested": "Didn't request this reset?",
+      "notRequestedDescription": "If you didn't request this reset, you can safely ignore this email. Your current password remains unchanged."
+    }
+  },
+  "Admin": {
+    "Emails": {
+      "title": "Email Testing",
+      "description": "Test your email templates with different configurations and translations.",
+      "form": {
+        "title": "Test Form",
+        "description": "Send a test email to verify your templates and translations.",
+        "template": {
+          "label": "Template",
+          "welcome": "Welcome email",
+          "passwordReset": "Password reset"
+        },
+        "email": {
+          "label": "Destination email",
+          "placeholder": "test@example.com"
+        },
+        "userFirstName": {
+          "label": "User first name",
+          "placeholder": "John"
+        },
+        "locale": {
+          "label": "Language"
+        },
+        "submit": {
+          "send": "Send test email",
+          "loading": "Sending..."
+        }
+      },
+      "result": {
+        "success": "Test email sent successfully! Template: {template}, Email: {email}"
+      }
+    }
+  },
+  "Auth": {
+    "login": {
+      "title": "Login",
+      "description": "Sign in to your account to continue",
+      "form": {
+        "email": "Email",
+        "emailPlaceholder": "your@email.com",
+        "password": "Password",
+        "passwordPlaceholder": "Your password",
+        "submit": "Sign in"
+      },
+      "separator": "or",
+      "oauth": {
+        "google": "Continue with Google",
+        "facebook": "Continue with Facebook",
+        "apple": "Continue with Apple"
+      },
+      "noAccount": "Don't have an account?",
+      "createAccount": "Create account",
+      "errors": {
+        "invalidCredentials": "Invalid email or password",
+        "oauth": "Error connecting with provider",
+        "general": "An error occurred"
+      }
+    }
+  },
+  "Sessions": {
+    "activeSessions": "Active Sessions",
+    "noSessions": "No active sessions",
+    "lastActivity": "Last activity",
+    "deviceType": {
+      "mobile": "Mobile",
+      "tablet": "Tablet",
+      "desktop": "Desktop",
+      "unknown": "Unknown"
+    },
+    "osName": {
+      "Windows": "Windows",
+      "macOS": "macOS",
+      "Linux": "Linux",
+      "iOS": "iOS",
+      "Android": "Android",
+      "ChromeOS": "ChromeOS",
+      "Unknown": "Unknown"
+    },
+    "sessionsDescription": "View and manage your connected sessions",
+    "errorLoadingSessions": "Error loading sessions",
+    "retry": "Retry",
+    "close": "Close",
+    "sessionCount": "session(s)"
+  }
+} 

@@ -1,0 +1,112 @@
+---
+description: Règles de développement frontend pour Cloaky.me : conventions sur les composants React/Next.js, usage de shadcn/ui, Tailwind CSS, navigation, Server Actions, accessibilité, internationalisation (next-intl), typage strict et SEO.
+globs: [
+  "src/app/**/*.{tsx,ts}", 
+  "src/components/**/*.{tsx,ts}", 
+  "src/lib/actions/**/*.{ts,tsx}", 
+  "src/messages/**/*.{ts,json}"
+]
+alwaysApply: true
+---
+# 🎨 Règles Frontend et Composants
+
+## Architecture des composants
+
+1. **Structure des dossiers** :
+    - Utiliser les composants shadcn/ui par défaut donc les installer si pas encore fait
+    - Décomposer les pages en composants réutilisables
+    - Créer un dossier `components` local dans le répertoire de la page si les composants sont spécifiques
+    - Pour les composants globaux, demander confirmation avant de les placer dans `src/components/ui`
+   
+
+2. **Composants** :
+   - **Privilégier les Client Components** sauf si Server Component nécessaire
+   - Toujours utiliser shadcn/ui sauf mention contraire
+   - Composants responsives pour ordinateur / mobile / tablette
+   - Typage TypeScript strict
+
+3. **Navigation** :
+   - **Utiliser useRouter** pour la navigation
+   - Éviter les balises `<a>` pour la navigation interne
+   - Utiliser `router.push()` et `router.replace()` selon le contexte
+
+4. **Gestion d'état** :
+   - **Minimiser l'utilisation de useState** - privilégier les props et Server Actions
+   - **Éviter useEffect** quand possible - utiliser les Server Actions pour les effets de bord
+   - Préférer les formulaires contrôlés par Server Actions plutôt que l'état local
+
+5. **Accès aux données** :
+   - **Aucun appel à la base de données côté client**
+   - Toutes les requêtes DB doivent passer par les Server Actions Update / Create / Delete
+
+6. **Pages** :
+   - SEO basique obligatoire (title, meta description, og:image)
+   - Gestion d'erreurs avec try/catch ou error boundary
+   - Logs explicites pour auth, paiement, upload
+   - Compatibilité Next.js v14 App Router
+
+7. **Type** :
+   - Tu tuilisera toujours les type prisma natif et les surchargera si besoin
+
+## Performance et SEO
+
+1. **Optimisations** :
+   - Images optimisées (WebP, lazy loading)
+   - Code splitting
+   - CSS optimisé
+   - JavaScript minifié
+
+2. **SEO** :
+   - Métadonnées complètes
+   - Sitemap.xml dynamique
+   - Robots.txt configuré
+   - Données structurées Schema.org
+
+## Internationalisation
+
+- Support FR/EN avec next-intl
+- Messages dans `src/messages/`
+- Routing localisé avec `[locale]`
+- **TOUS les textes doivent être traduits** via `useTranslations()`
+- **Aucun texte en dur** dans les composants
+
+### Règles de traduction obligatoires
+
+1. **Tous les textes visibles** doivent utiliser `useTranslations()`
+2. **Aucun texte en dur** dans les composants (pas de "Mon texte", "Submit", etc.)
+3. **Organisation des clés** : `Page.section.element` (ex: `Deposit.form.title`)
+4. **Fallback** : Toujours prévoir une valeur par défaut
+
+```tsx
+import { useTranslations } from "next-intl";
+
+export function LocalizedComponent() {
+  const t = useTranslations("Component.namespace");
+  
+  return (
+    <div>
+      <h1>{t("title")}</h1>
+      <p>{t("description")}</p>
+      <button>{t("submit")}</button>
+    </div>
+  );
+}
+```
+
+### Exemple d'organisation des clés
+
+```json
+{
+  "Deposit": {
+    "form": {
+      "title": "Déposer du contenu",
+      "description": "Partagez vos créations",
+      "submit": "Publier"
+    },
+    "validation": {
+      "required": "Ce champ est requis",
+      "invalid": "Format invalide"
+    }
+  }
+}
+```

@@ -1,0 +1,61 @@
+---
+description: Contexte et architecture du projet Cloaky.me : stack technique, responsabilités du développeur, fonctionnalités principales, structure des dossiers et design system.
+globs: []
+alwaysApply: true
+---
+# 📋 Contexte du projet Cloaky.me
+
+Cloaky.me est une plateforme anonyme de vente de contenus digitaux permettant aux créateurs de publier et monétiser leurs créations tout en offrant aux acheteurs une expérience fluide, sécurisée et confidentielle.
+
+## 👨‍💻 Profil développeur
+
+Vous êtes un **développeur professionnel full-stack** spécialisé dans :
+- **Next.js 14+** avec App Router et Server Components
+- **TypeScript** avec typage strict et interfaces avancées
+- **shadcn/ui** pour des composants UI cohérents et accessibles
+- **Tailwind CSS** pour un styling moderne et responsive
+- **Architecture full-stack** avec API Routes et Server Actions
+- **Base de données** avec Prisma et PostgreSQL
+- **Authentification** avec NextAuth
+- **Paiements** avec Stripe
+- **Stockage cloud** avec Cloudflare R2
+- **Tests** avec Jest et React Testing Library
+- **Déploiement** avec Vercel
+
+## 🛠️ Stack technique
+
+- **Frontend** : Next.js v14+ (App Router, TurboPack), React, Tailwind CSS, shadcn/ui
+- **Backend** : Next.js API Routes, Prisma avec Neon (PostgreSQL serverless)
+- **Auth** : NextAuth (Google, Facebook, Apple, email/mot de passe avec bcrypt)
+- **Paiements** : Stripe (Checkout, webhooks, commissions)
+- **Stockage** : Cloudflare R2
+- **Internationalisation** : next-intl (FR/EN)
+- **Validation** : react-hook-form + zod
+- **Tests** : Jest + React Testing Library
+- **Securité** des Server Actions : next-safe-action
+- **Déploiement** : Vercel
+
+## 🎯 Fonctionnalités principales
+
+1. **Authentification sécurisée** via NextAuth
+2. **Publication de contenus** avec upload vers Cloudflare R2
+3. **Lien de partage créateur** unique (`/u/{username}`)
+4. **Paiement sécurisé via Stripe**
+5. **Anonymat complet des acheteurs**
+6. **Avis et notes après achat**
+7. **Système de parrainage créateurs**
+8. **Super administration**
+
+## 📁 Structure du projet
+
+- `src/app/[locale]/` - Pages avec internationalisation
+- `src/components/ui/` - Composants shadcn/ui globaux
+- `src/lib/actions/` - Server Actions Next.js
+- `src/lib/validations/` - Schémas Zod
+- `prisma/` - Base de données et migrations
+- `src/messages/` - Fichiers de traduction
+
+## 🎨 Design system
+- Design tokens via Tailwind
+- Couleurs personnalisées (thème clair/sombre)
+- Composants atomiques via shadcn/ui + Radix UI

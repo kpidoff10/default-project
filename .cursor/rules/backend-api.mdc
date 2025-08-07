@@ -1,0 +1,71 @@
+---
+description: Règles et conventions pour le développement backend, API Routes, Server Actions, base de données Prisma et authentification NextAuth
+globs: ["src/lib/actions/**/*", "src/lib/validations/**/*", "prisma/**/*", "src/app/api/**/*"]
+alwaysApply: true
+---
+
+# 🔧 Règles Backend et API
+
+## Server Actions
+
+1. **Toutes les requêtes serveur** (insertions, updates, deletions) doivent passer par les Server Actions Next.js.
+2. **Valider systématiquement** les payloads backend avec **Zod**.
+3. **Gérer les erreurs proprement** avec **try/catch** et messages explicites.
+4. **Aucun appel à la base de données côté client** - toutes les opérations DB doivent être dans les Server Actions.
+5. **Privilégier les Server Actions** pour les mutations plutôt que les API Routes.
+
+## Base de données
+
+1. Utiliser **Prisma** pour toutes les opérations sur la base de données.
+2. Le **schéma** doit être centralisé dans `prisma/schema.prisma`.
+3. Les **migrations** doivent être automatisées via Prisma Migrate.
+
+## Authentification
+
+1. La gestion des sessions doit être assurée via **NextAuth**.
+2. Le projet doit prendre en charge le **multi-provider** (Google, Facebook, Apple, email).
+3. Les mots de passe doivent être **hachés avec bcrypt**.
+
+## API Routes
+
+1. **Valider les webhooks Stripe** correctement avec la signature.
+2. Implémenter la **protection CSRF** sur les routes sensibles.
+3. Appliquer des **headers de sécurité** stricts sur toutes les réponses API.
+
+## Variables d'environnement requises
+
+```env
+# Base de données
+DATABASE_URL="postgresql://..."
+
+# NextAuth
+NEXTAUTH_SECRET="..."
+NEXTAUTH_URL="http://localhost:3000"
+
+# Google OAuth
+GOOGLE_CLIENT_ID="..."
+GOOGLE_CLIENT_SECRET="..."
+
+# Facebook OAuth
+FACEBOOK_CLIENT_ID="..."
+FACEBOOK_CLIENT_SECRET="..."
+
+# Apple OAuth
+APPLE_ID="..."
+APPLE_TEAM_ID="..."
+APPLE_PRIVATE_KEY="..."
+
+# Stripe
+STRIPE_SECRET_KEY="..."
+STRIPE_WEBHOOK_SECRET="..."
+STRIPE_PUBLISHABLE_KEY="..."
+
+# Cloudflare R2
+R2_ACCOUNT_ID="..."
+R2_ACCESS_KEY_ID="..."
+R2_SECRET_ACCESS_KEY="..."
+R2_BUCKET_NAME="..."
+R2_PUBLIC_URL="..."
+
+# Logging
+LOG_LEVEL="info"

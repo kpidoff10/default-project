@@ -1,0 +1,274 @@
+{
+  "LocaleSwitcher": {
+    "french": "Français",
+    "english": "English"
+  },
+  "Navigation": {
+    "creators": "Créateurs",
+    "discover": "Découvrir",
+    "about": "À propos",
+    "dashboard": "Dashboard",
+    "login": "Connexion",
+    "register": "Inscription",
+    "logout": "Déconnexion",
+    "profile": "Profil"
+  },
+  "Home": {
+    "title": "Cloaky.me",
+    "description": "Plateforme anonyme de contenus digitaux permettant aux créateurs de publier et monétiser leurs créations tout en offrant aux acheteurs une expérience fluide, sécurisée et confidentielle.",
+    "discoverCreators": "Découvrir les créateurs",
+    "becomeCreator": "Devenir créateur"
+  },
+  "Footer": {
+    "description": "Plateforme anonyme de contenus digitaux. Partagez vos créations en toute confidentialité.",
+    "quickLogin": "Connexion rapide",
+    "sections": {
+      "product": "Produit",
+      "features": "Fonctionnalités",
+      "about": "À propos",
+      "legal": "Légal",
+      "support": "Support"
+    },
+    "copyright": "Fait avec",
+    "madeWith": "Fait avec"
+  },
+  "FooterMenu": {
+    "product": {
+      "products": "Produits"
+    },
+    "features": {
+      "features": "Fonctionnalités",
+      "creators": "Créateurs",
+      "enterprise": "Entreprise"
+    },
+    "about": {
+      "about": "À propos",
+      "blog": "Blog"
+    },
+    "legal": {
+      "contact": "Contact",
+      "terms": "Conditions d'utilisation",
+      "privacy": "Politique de confidentialité",
+      "cookies": "Cookies",
+      "gdpr": "RGPD"
+    },
+    "support": {
+      "help": "Centre d'aide",
+      "support": "Support"
+    }
+  },
+  "Navigation": {
+    "creators": "Créateurs",
+    "discover": "Découvrir",
+    "about": "À propos",
+    "dashboard": "Dashboard",
+    "login": "Connexion",
+    "register": "Inscription",
+    "logout": "Déconnexion",
+    "profile": "Profil",
+    "products": "Produits",
+    "language": "Langue",
+    "theme": "Thème"
+  },
+  "AuthMenu": {
+    "upload": "Publier",
+    "myContent": "Mes contenus",
+    "earnings": "Revenus",
+    "admin": "Administration"
+  },
+  "UserMenu": {
+    "dashboard": "Dashboard",
+    "profile": "Profil",
+    "sessions": "Sessions"
+  },
+  "AuthPages": {
+    "login": "Connexion",
+    "register": "Inscription"
+  },
+  "Sessions": {
+    "activeSessions": "Sessions actives",
+    "noSessions": "Aucune session active",
+    "lastActivity": "Dernière activité",
+    "deviceType": {
+      "mobile": "Mobile",
+      "tablet": "Tablette",
+      "desktop": "Ordinateur",
+      "unknown": "Inconnu"
+    },
+    "osName": {
+      "Windows": "Windows",
+      "macOS": "macOS",
+      "Linux": "Linux",
+      "iOS": "iOS",
+      "Android": "Android",
+      "ChromeOS": "ChromeOS",
+      "Unknown": "Inconnu"
+    },
+    "sessionsDescription": "Voir et gérer vos sessions connectées",
+    "errorLoadingSessions": "Erreur lors du chargement des sessions",
+    "retry": "Réessayer",
+    "close": "Fermer",
+    "sessionCount": "session(s)"
+  },
+  "Profile": {
+    "title": "Mon Profil",
+    "description": "Gérez vos informations personnelles et vos préférences",
+    "form": {
+      "saveChanges": "Sauvegarder",
+      "cancel": "Annuler",
+      "changesSaved": "Modifications sauvegardées",
+      "errorSaving": "Erreur lors de la sauvegarde"
+    },
+    "basicInfo": {
+      "title": "Informations de base",
+      "description": "Vos informations personnelles principales",
+      "firstName": "Prénom",
+      "firstNamePlaceholder": "Votre prénom",
+      "lastName": "Nom",
+      "lastNamePlaceholder": "Votre nom",
+      "email": "Email",
+      "emailPlaceholder": "votre@email.com",
+      "username": "Nom d'utilisateur",
+      "usernamePlaceholder": "votre-nom-utilisateur",
+      "bio": "Bio",
+      "bioPlaceholder": "Parlez-nous de vous..."
+    },
+    "contactInfo": {
+      "title": "Informations de contact",
+      "description": "Vos informations de contact",
+      "email": "Email",
+      "emailPlaceholder": "votre@email.com"
+    },
+    "tabs": {
+      "basicInfo": "Informations",
+      "contact": "Contact",
+      "notifications": "Notifications",
+      "security": "Sécurité",
+      "preferences": "Préférences"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "description": "Gérez vos préférences de notifications",
+      "emailNotifications": {
+        "title": "Notifications par email",
+        "description": "Recevoir des notifications par email",
+        "configure": "Configurer"
+      },
+      "pushNotifications": {
+        "title": "Notifications push",
+        "description": "Recevoir des notifications push dans le navigateur",
+        "configure": "Configurer"
+      }
+    },
+    "security": {
+      "title": "Sécurité",
+      "description": "Gérez vos paramètres de sécurité",
+      "changePassword": {
+        "title": "Changer le mot de passe",
+        "description": "Mettre à jour votre mot de passe",
+        "edit": "Modifier"
+      },
+      "activeSessions": {
+        "title": "Sessions actives",
+        "description": "Voir et gérer vos sessions connectées",
+        "view": "Voir"
+      }
+    },
+    "header": {
+      "changeCover": "Changer la couverture",
+      "changePhoto": "Changer la photo"
+    }
+  },
+  "Emails": {
+    "Welcome": {
+      "title": "Bienvenue sur Cloaky.me, {userFirstName} ! 🎉",
+      "subtitle": "Nous sommes ravis de vous accueillir sur la plateforme anonyme de contenus digitaux. Vous pouvez maintenant commencer à partager vos créations en toute confidentialité.",
+      "verificationRequired": "Pour commencer à utiliser Cloaky.me, veuillez vérifier votre adresse email.",
+      "verifyEmail": "Vérifier mon email",
+      "whatYouCanDo": "Voici ce que vous pouvez faire maintenant :",
+      "features": {
+        "publish": {
+          "text": "Publier vos premiers contenus",
+          "description": "Partagez vos créations en toute confidentialité"
+        },
+        "profile": {
+          "text": "Configurer votre profil créateur",
+          "description": "Personnalisez votre espace créateur"
+        },
+        "community": {
+          "text": "Découvrir la communauté",
+          "description": "Explorez les contenus d'autres créateurs"
+        }
+      }
+    },
+    "PasswordReset": {
+      "title": "🔐 Réinitialisation de mot de passe",
+      "greeting": "Bonjour {userFirstName},",
+      "description": "Vous avez demandé la réinitialisation de votre mot de passe. Cliquez sur le bouton ci-dessous pour créer un nouveau mot de passe sécurisé.",
+      "resetPassword": "Réinitialiser mon mot de passe",
+      "security": "Sécurité",
+      "securityDescription": "Ce lien expire dans 1 heure pour des raisons de sécurité.",
+      "notRequested": "Vous n'avez pas demandé cette réinitialisation ?",
+      "notRequestedDescription": "Si vous n'avez pas demandé cette réinitialisation, vous pouvez ignorer cet email en toute sécurité. Votre mot de passe actuel reste inchangé."
+    }
+  },
+  "Admin": {
+    "Emails": {
+      "title": "Test des Emails",
+      "description": "Testez vos templates d'emails avec différentes configurations et traductions.",
+      "form": {
+        "title": "Formulaire de Test",
+        "description": "Envoyez un email de test pour vérifier vos templates et traductions.",
+        "template": {
+          "label": "Template",
+          "welcome": "Email de bienvenue",
+          "passwordReset": "Réinitialisation de mot de passe"
+        },
+        "email": {
+          "label": "Email de destination",
+          "placeholder": "test@example.com"
+        },
+        "userFirstName": {
+          "label": "Prénom de l'utilisateur",
+          "placeholder": "John"
+        },
+        "locale": {
+          "label": "Langue"
+        },
+        "submit": {
+          "send": "Envoyer l'email de test",
+          "loading": "Envoi en cours..."
+        }
+      },
+      "result": {
+        "success": "Email de test envoyé avec succès ! Template: {template}, Email: {email}"
+      }
+    }
+  },
+  "Auth": {
+    "login": {
+      "title": "Connexion",
+      "description": "Connectez-vous à votre compte pour continuer",
+      "form": {
+        "email": "Email",
+        "emailPlaceholder": "votre@email.com",
+        "password": "Mot de passe",
+        "passwordPlaceholder": "Votre mot de passe",
+        "submit": "Se connecter"
+      },
+      "separator": "ou",
+      "oauth": {
+        "google": "Continuer avec Google",
+        "facebook": "Continuer avec Facebook",
+        "apple": "Continuer avec Apple"
+      },
+      "noAccount": "Vous n'avez pas de compte ?",
+      "createAccount": "Créer un compte",
+      "errors": {
+        "invalidCredentials": "Email ou mot de passe incorrect",
+        "oauth": "Erreur lors de la connexion avec le provider",
+        "general": "Une erreur est survenue"
+      }
+    }
+  }
+} 
