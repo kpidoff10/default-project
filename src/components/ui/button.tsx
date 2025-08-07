@@ -4,6 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip";
+import { Loader2 } from "lucide-react";
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
@@ -14,6 +15,8 @@ const buttonVariants = cva(
           "bg-primary text-primary-foreground shadow-xs hover:bg-primary/90",
         destructive:
           "bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+        destructiveGhost:
+          "text-destructive hover:bg-destructive/10 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40",
         outline:
           "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
         secondary:
@@ -32,15 +35,17 @@ const buttonVariants = cva(
     defaultVariants: {
       variant: "default",
       size: "default",
+    
     },
   }
 );
 
 interface ButtonProps
-  extends React.ComponentProps<"button">,
+  extends Omit<React.ComponentProps<"button">, "color">,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   tooltip?: string;
+  isLoading?: boolean;
 }
 
 function Button({
@@ -49,17 +54,50 @@ function Button({
   size,
   asChild = false,
   tooltip,
+  isLoading = false,
   children,
+  disabled,
   ...props
 }: ButtonProps) {
   const Comp = asChild ? Slot : "button";
+  
+  // Rendu du contenu avec gestion du loading
+  const renderContent = () => {
+    if (isLoading) {
+      // Si c'est un bouton avec icône, on remplace juste l'icône
+      const hasIcon = React.Children.toArray(children).some(
+        (child) => React.isValidElement(child) && child.type === 'svg'
+      );
+      
+      if (hasIcon) {
+        return (
+          <>
+            <Loader2 className="h-4 w-4 animate-spin" />
+            {React.Children.map(children, (child) => {
+              if (React.isValidElement(child) && child.type !== 'svg') {
+                return child;
+              }
+              return null;
+            })}
+          </>
+        );
+      }
+      
+      // Sinon on remplace tout le contenu
+      return <Loader2 className="h-4 w-4 animate-spin" />;
+    }
+    
+    return children;
+  };
+
   const buttonElement = (
     <Comp
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
+      disabled={disabled || isLoading}
       {...props}
     >
-      {children}
+      {renderContent()}
     </Comp>
   );
 

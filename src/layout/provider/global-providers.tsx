@@ -6,6 +6,7 @@ import { ReactNode } from "react";
 import { SessionUpdater } from "@/components/providers/session-updater";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { QueryProvider } from "@/providers/query-provider";
+import { Toaster } from "sonner";
 
 interface GlobalProvidersProps {
   children: ReactNode;
@@ -27,9 +28,10 @@ export function GlobalProviders({
     >
       {/* Provider d'authentification */}
       <AuthProvider>
-        <SessionUpdater />
         <NextIntlClientProvider locale={locale} messages={messages}>
+          <SessionUpdater />
           <QueryProvider>{children}</QueryProvider>
+          <Toaster />
         </NextIntlClientProvider>
       </AuthProvider>
     </ThemeProvider>

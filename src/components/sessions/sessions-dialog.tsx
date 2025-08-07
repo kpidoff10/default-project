@@ -25,18 +25,7 @@ export function SessionsDialog({
   onOpenChange,
 }: SessionsDialogProps) {
   const { user } = useAuth();
-  const [isRefreshing, setIsRefreshing] = useState(false);
 
-  const handleRefresh = async () => {
-    setIsRefreshing(true);
-    try {
-      // Ici on pourrait ajouter une fonction de refresh pour la liste virtuelle
-      // Pour l'instant, on simule juste le loading
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-    } finally {
-      setIsRefreshing(false);
-    }
-  };
 
   const handleClose = () => {
     onOpenChange?.(false);
@@ -49,14 +38,12 @@ export function SessionsDialog({
   return (
     <DialogResponsive open={open} onOpenChange={onOpenChange} trigger={trigger}>
       <DialogResponsiveContent className="sm:max-w-[600px]" drawerHeight="80%">
-        <SessionsHeader onRefresh={handleRefresh} isRefreshing={isRefreshing} />
+        <SessionsHeader />
 
         <div className="space-y-4">
           <SessionsVirtualList
             height="55vh"
             pageSize={20}
-            onRefresh={handleRefresh}
-            isRefreshing={isRefreshing}
           />
         </div>
 

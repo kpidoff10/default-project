@@ -8,6 +8,7 @@ import { Button } from "./button";
 import { cn } from "@/lib/utils";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useVirtualizer } from "@tanstack/react-virtual";
+import { useTranslations } from "next-intl";
 
 // Composant unifié pour l'animation de transformation
 function UnifiedPullToRefreshIndicator({
@@ -17,6 +18,8 @@ function UnifiedPullToRefreshIndicator({
   isRefreshing: boolean;
   onRefresh: () => void;
 }) {
+  const t = useTranslations("VirtualList.refresh");
+  
   return (
     <div className="w-full mb-2 pt-2 md:pt-0">
       <div
@@ -28,12 +31,12 @@ function UnifiedPullToRefreshIndicator({
         {isRefreshing && <Loader2 className="h-4 w-4 animate-spin" />}
         <span
           className={cn(
-            "transition-all duration-300 text-muted-foreground",
+            "transition-all duration-300 text-muted-foreground cursor-pointer hover:text-foreground hover:scale-105",
             isRefreshing ? "text-sm" : "text-xs"
           )}
           onClick={!isRefreshing ? onRefresh : undefined}
         >
-          {isRefreshing ? "Actualisation..." : "Cliquez pour actualiser"}
+          {isRefreshing ? t("refreshing") : t("clickToRefresh")}
         </span>
       </div>
     </div>
@@ -84,6 +87,9 @@ interface VirtualListProps<T> {
   // Indique si on charge plus de données (utilisé avec data)
   isLoadingMore?: boolean;
 
+  // Indique si on est en train de charger
+  isLoading?: boolean;
+
   // Fonction pour rafraîchir les données (pull-to-refresh)
   onRefresh?: () => void;
 
@@ -106,7 +112,8 @@ export function VirtualList<T>({
   emptyComponent,
   errorComponent,
   onLoadMore,
-  hasMore,
+  hasMore,  
+  isLoading,
   isLoadingMore,
   onRefresh,
   isRefreshing,
@@ -114,6 +121,7 @@ export function VirtualList<T>({
 }: VirtualListProps<T>) {
   const parentRef = React.useRef<HTMLDivElement>(null);
   const [showScrollToTop, setShowScrollToTop] = React.useState(false);
+  const t = useTranslations("VirtualList");
 
   // Mode 1: Données directes
   const isDataMode = data !== undefined;
@@ -124,7 +132,7 @@ export function VirtualList<T>({
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-    isLoading,
+    isLoading: isQueryLoading,
     isError,
     error,
   } = useInfiniteQuery({
@@ -146,7 +154,7 @@ export function VirtualList<T>({
   const allItems = isDataMode ? (data as T[]) : queryItems;
   const currentHasMore = isDataMode ? hasMore : hasNextPage;
   const currentIsLoadingMore = isDataMode ? isLoadingMore : isFetchingNextPage;
-  const currentIsLoading = isDataMode ? false : isLoading;
+  const currentIsLoading = isDataMode ? isLoading : isQueryLoading;
   const currentIsError = isDataMode ? false : isError;
   const currentError = isDataMode ? null : error;
 
@@ -222,7 +230,7 @@ export function VirtualList<T>({
         {loadingComponent || (
           <div className="flex items-center space-x-2">
             <Loader2 className="h-4 w-4 animate-spin" />
-            <span className="text-sm text-muted-foreground">Chargement...</span>
+            <span className="text-sm text-muted-foreground">{t("loading")}</span>
           </div>
         )}
       </div>
@@ -235,7 +243,7 @@ export function VirtualList<T>({
         {errorComponent || (
           <div className="text-center">
             <p className="text-destructive text-sm">
-              Erreur lors du chargement
+              {t("error.title")}
             </p>
             {currentError && (
               <p className="text-xs text-muted-foreground mt-1">
@@ -248,11 +256,11 @@ export function VirtualList<T>({
     );
   }
 
-  if (allItems.length === 0) {
+  if (allItems.length === 0 && !currentIsLoading) {
     return (
       <div className={cn("flex items-center justify-center p-4", className)}>
         {emptyComponent || (
-          <p className="text-sm text-muted-foreground">Aucun élément</p>
+          <p className="text-sm text-muted-foreground">{t("empty")}</p>
         )}
       </div>
     );
@@ -318,12 +326,12 @@ export function VirtualList<T>({
                         <div className="flex items-center space-x-2">
                           <Loader2 className="h-4 w-4 animate-spin" />
                           <span className="text-sm text-muted-foreground">
-                            Chargement...
+                            {t("loading")}
                           </span>
                         </div>
                       ) : (
                         <span className="text-sm text-muted-foreground">
-                          Fin de la liste
+                          {t("endOfList")}
                         </span>
                       )}
                     </div>
@@ -367,12 +375,12 @@ export function VirtualList<T>({
                           <div className="flex items-center space-x-2">
                             <Loader2 className="h-4 w-4 animate-spin" />
                             <span className="text-sm text-muted-foreground">
-                              Chargement...
+                              {t("loading")}
                             </span>
                           </div>
                         ) : (
                           <span className="text-sm text-muted-foreground">
-                            Fin de la liste
+                            {t("endOfList")}
                           </span>
                         )}
                       </div>
@@ -400,7 +408,7 @@ export function VirtualList<T>({
           >
             <ArrowUp className="h-4 w-4" />
             <span className="text-xs text-muted-foreground">
-              Remonter en haut
+              {t("scrollToTop")}
             </span>
           </div>
         </div>

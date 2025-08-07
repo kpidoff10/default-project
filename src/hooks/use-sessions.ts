@@ -2,29 +2,32 @@
 
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import { getSessionInfo } from "@/lib/actions/shared/session-info";
+import { getSessionInfo, revokeSession, revokeAllSessions } from "@/lib/actions/shared/session-info";
 import { updateSessionInfoClient } from "@/lib/actions/shared/session-info";
 import { useAuth } from "@/providers/auth-provider";
 import { useEffect } from "react";
+import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 export function useSessions() {
   const { user } = useAuth();
+  const t = useTranslations("Sessions");
 
   return useQuery({
     queryKey: ["sessions", user?.id],
     queryFn: async () => {
       if (!user?.id) {
-        throw new Error("Utilisateur non connecté");
+        throw new Error(t("userNotConnected"));
       }
       
       const result = await getSessionInfo(user.id);
       
       if (!result.success) {
-        throw new Error(result.error || "Erreur lors de la récupération des sessions");
+        throw new Error(result.error || t("errorLoadingSessions"));
       }
 
       if (!result.data) {
-        throw new Error("Aucune donnée reçue");
+        throw new Error(t("noDataReceived"));
       }
 
       // Convertir les dates string en Date objects
@@ -45,22 +48,23 @@ export function useSessions() {
  */
 export function useInfiniteSessions(pageSize: number = 10) {
   const { user } = useAuth();
+  const t = useTranslations("Sessions");
 
   return useInfiniteQuery({
     queryKey: ["infinite-sessions", user?.id, pageSize],
     queryFn: async ({ pageParam }) => {
       if (!user?.id) {
-        throw new Error("Utilisateur non connecté");
+        throw new Error(t("userNotConnected"));
       }
       
       const result = await getSessionInfo(user.id, pageSize, pageParam);
       
       if (!result.success) {
-        throw new Error(result.error || "Erreur lors de la récupération des sessions");
+        throw new Error(result.error || t("errorLoadingSessions"));
       }
 
       if (!result.data) {
-        throw new Error("Aucune donnée reçue");
+        throw new Error(t("noDataReceived"));
       }
 
       // Convertir les dates string en Date objects
@@ -83,28 +87,60 @@ export function useInfiniteSessions(pageSize: number = 10) {
 }
 
 // Hook pour terminer une session (si vous avez cette fonctionnalité)
-export function useTerminateSession() {
+export function useRevokeSession() {
   const queryClient = useQueryClient();
   const { user } = useAuth();
+  const t = useTranslations("Sessions");
 
   return useMutation({
     mutationFn: async (sessionId: string) => {
-      // TODO: Implémenter la fonction terminateSession dans vos Server Actions
-      // const result = await terminateSession(sessionId);
-      // if (!result.success) {
-      //   throw new Error(result.error || "Erreur lors de la terminaison de la session");
-      // }
-      // return result.data;
-      
-      // Simulation pour l'instant
-      return { sessionId };
+      const result = await revokeSession(sessionId);
+      if (!result.success) {
+        throw new Error(result.error || t("errorRevokingSession"));
+      }
+      return result;
     },
     onSuccess: () => {
       // Invalider le cache des sessions pour forcer un re-fetch
       queryClient.invalidateQueries({ queryKey: ["sessions", user?.id] });
+      queryClient.invalidateQueries({ queryKey: ["infinite-sessions", user?.id] });
+      toast.success(t("sessionRevoked"));
     },
     onError: (error) => {
-      console.error("Erreur lors de la terminaison de la session:", error);
+      toast.error(t("errorRevokingSession"));
+    },
+  });
+}
+
+/**
+ * Hook pour révoquer toutes les sessions d'un utilisateur
+ */
+export function useRevokeAllSessions() {
+  const queryClient = useQueryClient();
+  const { user } = useAuth();
+  const t = useTranslations("Sessions");
+
+  return useMutation({
+    mutationFn: async () => {
+      if (!user?.id) {
+        throw new Error(t("userNotConnected"));
+      }
+      
+      // Appeler la fonction pour révoquer toutes les sessions
+      const result = await revokeAllSessions(user.id);
+      if (!result.success) {
+        throw new Error(result.error || t("errorRevokingAllSessions"));
+      }
+      return result;
+    },
+    onSuccess: () => {
+      // Invalider tous les caches liés aux sessions
+      queryClient.invalidateQueries({ queryKey: ["sessions", user?.id] });
+      queryClient.invalidateQueries({ queryKey: ["infinite-sessions", user?.id] });
+      toast.success(t("allSessionsRevoked"));
+    },
+    onError: (error) => {
+      toast.error(t("errorRevokingAllSessions"));
     },
   });
 }
@@ -131,17 +167,7 @@ export function useSessionUpdate() {
   useEffect(() => {
     if (isAuthenticated && user?.id) {
       // Mettre à jour les informations de session avec le User-Agent
-      updateSessionInfoClient(navigator.userAgent)
-        .then((result) => {
-          if (result.success) {
-            console.log("Informations de session mises à jour:", result.data);
-          } else {
-            console.warn("Erreur lors de la mise à jour de la session:", result.error);
-          }
-        })
-        .catch((error) => {
-          console.error("Erreur lors de la mise à jour de la session:", error);
-        });
+      updateSessionInfoClient(navigator.userAgent);
     }
   }, [isAuthenticated, user?.id]);
 

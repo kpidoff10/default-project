@@ -8,19 +8,11 @@ import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 
 interface ProfileHeaderProps {
-  isSaving: boolean;
-  saveStatus: "idle" | "success" | "error";
-  onSave: () => void;
-  onCancel: () => void;
   userImage?: string | null;
   userName?: string | null;
 }
 
 export function ProfileHeader({
-  isSaving,
-  saveStatus,
-  onSave,
-  onCancel,
   userImage,
   userName,
 }: ProfileHeaderProps) {

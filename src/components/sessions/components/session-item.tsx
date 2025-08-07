@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import {
   formatDate,
   getDeviceIcon,
@@ -8,10 +9,12 @@ import {
 } from "@/lib/utils/device-utils";
 
 import { Badge } from "@/components/ui/badge";
-import { Globe } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Globe, X } from "lucide-react";
 import { SessionData } from "@/lib/actions/shared/session-info";
 import { getCountryFlag } from "@/lib/utils/country-utils";
 import { useTranslations } from "next-intl";
+import { useRevokeSession } from "@/hooks/use-sessions";
 
 interface SessionItemProps {
   session: SessionData;
@@ -19,6 +22,11 @@ interface SessionItemProps {
 
 export function SessionItem({ session }: SessionItemProps) {
   const t = useTranslations("Sessions");
+  const revokeSession = useRevokeSession();
+
+  const handleDelete = () => {
+    revokeSession.mutate(session.id);
+  };
 
   return (
     <div key={session.id}>
@@ -49,9 +57,23 @@ export function SessionItem({ session }: SessionItemProps) {
             </div>
           </div>
         </div>
-        <div className="text-xs text-muted-foreground">
-          {formatDate(session.createdAt)}
-        </div>
+                 <div className="flex items-center space-x-2">
+           <div className="text-xs text-muted-foreground">
+             {formatDate(session.createdAt)}
+           </div>
+        
+              <Button
+                 variant="destructiveGhost"
+                 size="sm"
+                 onClick={handleDelete}
+                 tooltip={t("deleteSession")}
+                 isLoading={revokeSession.isPending}
+                 className="h-6 w-6 p-0"
+               >
+                 <X className="h-3 w-3" />
+               </Button>
+          
+         </div>
       </div>
     </div>
   );

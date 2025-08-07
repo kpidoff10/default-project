@@ -1,9 +1,12 @@
 "use client";
 
 import { SessionItem } from "./session-item";
+import { SessionSkeleton } from "./session-skeleton";
 import { VirtualList } from "@/components/ui/virtual-list";
-import { useInfiniteSessions } from "@/hooks/use-sessions";
+import { useInfiniteSessions, useRevokeAllSessions } from "@/hooks/use-sessions";
 import { useTranslations } from "next-intl";
+import { Button } from "@/components/ui/button";
+import { LogOut } from "lucide-react";
 
 // Type correspondant à celui attendu par SessionItem
 interface SessionData {
@@ -21,21 +24,14 @@ interface SessionsVirtualListProps {
 
   // Taille de la page pour la pagination
   pageSize?: number;
-
-  // Fonction de rafraîchissement
-  onRefresh?: () => void;
-
-  // Indique si on rafraîchit
-  isRefreshing?: boolean;
 }
 
 export function SessionsVirtualList({
   height = 400,
   pageSize = 10,
-  onRefresh,
-  isRefreshing,
 }: SessionsVirtualListProps) {
   const t = useTranslations("Sessions");
+  const revokeAllSessions = useRevokeAllSessions();
 
   const {
     data,
@@ -45,7 +41,11 @@ export function SessionsVirtualList({
     isLoading,
     error,
     isError,
+    refetch,
+    isRefetching,
   } = useInfiniteSessions(pageSize);
+
+
 
   // Extraire toutes les sessions de toutes les pages et filtrer les sessions sans lastActivity
   const allSessions =
@@ -60,14 +60,6 @@ export function SessionsVirtualList({
   const renderSessionItem = (session: SessionData) => (
     <div className="mb-2">
       <SessionItem key={session.id} session={session} />
-    </div>
-  );
-
-  const loadingComponent = (
-    <div className="space-y-3">
-      <div className="h-16 bg-muted rounded animate-pulse" />
-      <div className="h-16 bg-muted rounded animate-pulse" />
-      <div className="h-16 bg-muted rounded animate-pulse" />
     </div>
   );
 
@@ -90,22 +82,43 @@ export function SessionsVirtualList({
     }
   };
 
+  // Fonction pour révoquer toutes les sessions
+  const handleRevokeAllSessions = () => {
+    revokeAllSessions.mutate();
+  };
+
   return (
-    <VirtualList<SessionData>
-      data={allSessions}
-      renderItem={renderSessionItem}
-      height={height}
-      itemHeight={90} // Hauteur augmentée pour compenser l'espacement
-      loadingComponent={isLoading ? loadingComponent : undefined}
-      emptyComponent={
-        allSessions.length === 0 && !isLoading ? emptyComponent : undefined
-      }
-      errorComponent={isError ? errorComponent : undefined}
-      onLoadMore={loadMore}
-      hasMore={hasNextPage}
-      isLoadingMore={isFetchingNextPage}
-      onRefresh={onRefresh}
-      isRefreshing={isRefreshing}
-    />
+    <div className="space-y-4">
+      {/* Bouton pour révoquer toutes les sessions */}
+      {allSessions.length > 0 && (
+        <div className="flex justify-end">
+          <Button
+            variant="destructiveGhost"
+            size="sm"
+            onClick={handleRevokeAllSessions}
+            isLoading={revokeAllSessions.isPending}
+            tooltip={t("revokeAllSessions")}
+          >
+            <LogOut className="h-4 w-4 mr-2" />
+            {t("revokeAllSessions")}
+          </Button>
+        </div>
+      )}
+
+      <VirtualList<SessionData>
+        data={allSessions}
+        renderItem={renderSessionItem}
+        height={height}
+        itemHeight={90} // Hauteur augmentée pour compenser l'espacement
+        loadingComponent={<SessionSkeleton />}
+        isLoading={isLoading}
+        errorComponent={isError ? errorComponent : undefined}
+        onLoadMore={loadMore}
+        hasMore={hasNextPage}
+        isLoadingMore={isFetchingNextPage}
+        onRefresh={refetch}
+        isRefreshing={isRefetching}
+      />
+    </div>
   );
 }

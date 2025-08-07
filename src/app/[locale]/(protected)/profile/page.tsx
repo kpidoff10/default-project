@@ -12,10 +12,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function ProfilePage() {
   const { user, isAuthenticated } = useAuth();
-  const [isSaving, setIsSaving] = useState(false);
-  const [saveStatus, setSaveStatus] = useState<"idle" | "success" | "error">(
-    "idle"
-  );
 
   // Initialiser le formulaire avec les données utilisateur
   const form = useForm<ProfileFormData>({
@@ -39,32 +35,14 @@ export default function ProfilePage() {
   }
 
   const onSubmit = async (data: ProfileFormData) => {
-    setIsSaving(true);
-    setSaveStatus("idle");
-
     try {
       // Simulation d'une sauvegarde
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
       console.log("Données du formulaire:", data);
 
-      setIsSaving(false);
-      setSaveStatus("success");
-
-      // Réinitialiser le statut après 3 secondes
-      setTimeout(() => setSaveStatus("idle"), 3000);
     } catch (error) {
-      setIsSaving(false);
-      setSaveStatus("error");
-
-      // Réinitialiser le statut après 3 secondes
-      setTimeout(() => setSaveStatus("idle"), 3000);
     }
-  };
-
-  const handleCancel = () => {
-    form.reset();
-    setSaveStatus("idle");
   };
 
   return (
@@ -72,10 +50,6 @@ export default function ProfilePage() {
       <div className="max-w-6xl mx-auto space-y-8">
         {/* En-tête avec image de couverture et photo de profil */}
         <ProfileHeader
-          isSaving={isSaving}
-          saveStatus={saveStatus}
-          onSave={form.handleSubmit(onSubmit)}
-          onCancel={handleCancel}
           userImage={user?.image}
           userName={user?.name}
         />

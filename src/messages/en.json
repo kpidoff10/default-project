@@ -11,7 +11,10 @@
     "login": "Login",
     "register": "Register",
     "logout": "Logout",
-    "profile": "Profile"
+    "profile": "Profile",
+    "products": "Products",
+    "language": "Language",
+    "theme": "Theme"
   },
   "Home": {
     "title": "Cloaky.me",
@@ -57,19 +60,6 @@
       "support": "Support"
     }
   },
-  "Navigation": {
-    "creators": "Creators",
-    "discover": "Discover",
-    "about": "About",
-    "dashboard": "Dashboard",
-    "login": "Login",
-    "register": "Register",
-    "logout": "Logout",
-    "profile": "Profile",
-    "products": "Products",
-    "language": "Language",
-    "theme": "Theme"
-  },
   "AuthMenu": {
     "upload": "Publish",
     "myContent": "My Content",
@@ -80,6 +70,62 @@
     "dashboard": "Dashboard",
     "profile": "Profile",
     "sessions": "Sessions"
+  },
+  "AuthPages": {
+    "login": "Login",
+    "register": "Register"
+  },
+  "Sessions": {
+    "activeSessions": "Active Sessions",
+    "noSessions": "No active sessions",
+    "lastActivity": "Last activity",
+    "deviceType": {
+      "mobile": "Mobile",
+      "tablet": "Tablet",
+      "desktop": "Desktop",
+      "unknown": "Unknown"
+    },
+    "osName": {
+      "Windows": "Windows",
+      "macOS": "macOS",
+      "Linux": "Linux",
+      "iOS": "iOS",
+      "Android": "Android",
+      "ChromeOS": "ChromeOS",
+      "Unknown": "Unknown"
+    },
+    "sessionsDescription": "View and manage your connected sessions",
+    "errorLoadingSessions": "Error loading sessions",
+    "retry": "Retry",
+    "close": "Close",
+    "sessionCount": "session(s)",
+    "deleteSession": "Delete this session",
+    "sessionDeleted": "Session deleted successfully",
+    "errorDeletingSession": "Error deleting session",
+    "sessionUpdated": "Session information updated",
+    "errorUpdatingSession": "Error updating session information",
+    "sessionRevoked": "Session revoked successfully",
+    "errorRevokingSession": "Error revoking session",
+    "allSessionsRevoked": "All sessions have been revoked successfully",
+    "errorRevokingAllSessions": "Error revoking all sessions",
+    "revokeAllSessions": "Revoke all sessions",
+    "userNotConnected": "User not connected",
+    "noDataReceived": "No data received"
+  },
+  "VirtualList": {
+    "refresh": {
+      "clickToRefresh": "Click to refresh",
+      "refreshing": "Refreshing..."
+    },
+    "loading": "Loading...",
+    "error": {
+      "title": "Error loading data",
+      "message": "An error occurred while loading data"
+    },
+    "empty": "No items",
+    "loadMore": "Load more",
+    "endOfList": "End of list",
+    "scrollToTop": "Scroll to top"
   },
   "Profile": {
     "title": "My Profile",
@@ -149,10 +195,6 @@
       "changeCover": "Change Cover",
       "changePhoto": "Change Photo"
     }
-  },
-  "AuthPages": {
-    "login": "Login",
-    "register": "Register"
   },
   "Emails": {
     "Welcome": {
@@ -245,30 +287,5 @@
         "general": "An error occurred"
       }
     }
-  },
-  "Sessions": {
-    "activeSessions": "Active Sessions",
-    "noSessions": "No active sessions",
-    "lastActivity": "Last activity",
-    "deviceType": {
-      "mobile": "Mobile",
-      "tablet": "Tablet",
-      "desktop": "Desktop",
-      "unknown": "Unknown"
-    },
-    "osName": {
-      "Windows": "Windows",
-      "macOS": "macOS",
-      "Linux": "Linux",
-      "iOS": "iOS",
-      "Android": "Android",
-      "ChromeOS": "ChromeOS",
-      "Unknown": "Unknown"
-    },
-    "sessionsDescription": "View and manage your connected sessions",
-    "errorLoadingSessions": "Error loading sessions",
-    "retry": "Retry",
-    "close": "Close",
-    "sessionCount": "session(s)"
   }
 } 

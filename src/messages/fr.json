@@ -11,7 +11,10 @@
     "login": "Connexion",
     "register": "Inscription",
     "logout": "Déconnexion",
-    "profile": "Profil"
+    "profile": "Profil",
+    "products": "Produits",
+    "language": "Langue",
+    "theme": "Thème"
   },
   "Home": {
     "title": "Cloaky.me",
@@ -57,19 +60,6 @@
       "support": "Support"
     }
   },
-  "Navigation": {
-    "creators": "Créateurs",
-    "discover": "Découvrir",
-    "about": "À propos",
-    "dashboard": "Dashboard",
-    "login": "Connexion",
-    "register": "Inscription",
-    "logout": "Déconnexion",
-    "profile": "Profil",
-    "products": "Produits",
-    "language": "Langue",
-    "theme": "Thème"
-  },
   "AuthMenu": {
     "upload": "Publier",
     "myContent": "Mes contenus",
@@ -108,7 +98,34 @@
     "errorLoadingSessions": "Erreur lors du chargement des sessions",
     "retry": "Réessayer",
     "close": "Fermer",
-    "sessionCount": "session(s)"
+    "sessionCount": "session(s)",
+    "deleteSession": "Supprimer cette session",
+    "sessionDeleted": "Session supprimée avec succès",
+    "errorDeletingSession": "Erreur lors de la suppression de la session",
+    "sessionUpdated": "Informations de session mises à jour",
+    "errorUpdatingSession": "Erreur lors de la mise à jour de la session",
+    "sessionRevoked": "Session révoquée avec succès",
+    "errorRevokingSession": "Erreur lors de la révocation de la session",
+    "allSessionsRevoked": "Toutes les sessions ont été révoquées avec succès",
+    "errorRevokingAllSessions": "Erreur lors de la révocation de toutes les sessions",
+    "revokeAllSessions": "Révoquer toutes les sessions",
+    "userNotConnected": "Utilisateur non connecté",
+    "noDataReceived": "Aucune donnée reçue"
+  },
+  "VirtualList": {
+    "refresh": {
+      "clickToRefresh": "Cliquez pour actualiser",
+      "refreshing": "Actualisation..."
+    },
+    "loading": "Chargement...",
+    "error": {
+      "title": "Erreur lors du chargement",
+      "message": "Une erreur s'est produite lors du chargement des données"
+    },
+    "empty": "Aucun élément",
+    "loadMore": "Charger plus",
+    "endOfList": "Fin de la liste",
+    "scrollToTop": "Remonter en haut"
   },
   "Profile": {
     "title": "Mon Profil",
