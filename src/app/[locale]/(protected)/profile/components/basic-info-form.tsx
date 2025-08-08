@@ -42,6 +42,7 @@ export function BasicInfoForm() {
             name="firstName"
             render={({ field }) => (
               <FormInput
+                textTransform="first"
                 label={t("basicInfo.firstName")}
                 placeholder={t("basicInfo.firstNamePlaceholder")}
                 {...field}
@@ -54,6 +55,7 @@ export function BasicInfoForm() {
             name="lastName"
             render={({ field }) => (
               <FormInput
+                textTransform="uppercase"
                 label={t("basicInfo.lastName")}
                 placeholder={t("basicInfo.lastNamePlaceholder")}
                 {...field}
