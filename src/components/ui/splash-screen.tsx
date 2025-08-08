@@ -26,7 +26,7 @@ export default function SplashScreen() {
           }
         }
       `}</style>
-      <div className="fixed inset-0 z-[99999] flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+      <div className="fixed inset-0 z-[99999] flex items-center justify-center bg-gradient-to-br from-white via-slate-50 to-white dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
         {/* Cercles d'arrière-plan décoratifs */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -36,7 +36,7 @@ export default function SplashScreen() {
         <div className="relative z-10 flex flex-col items-center">
           {/* Logo principal */}
           <div className="relative mb-8">
-            <div className="w-32 h-32 bg-white/5 backdrop-blur-sm rounded-3xl flex items-center justify-center shadow-2xl border border-white/10 p-4">
+            <div className="w-32 h-32 bg-black/5 dark:bg-white/5 backdrop-blur-sm rounded-3xl flex items-center justify-center shadow-2xl border border-black/10 dark:border-white/10 p-4">
               <Image
                 src="/logo.png"
                 alt={clientConfig.app.name}
@@ -53,11 +53,11 @@ export default function SplashScreen() {
 
           {/* Texte et chargement */}
           <div className="text-center space-y-4">
-            <h1 className="text-3xl font-bold text-white tracking-wide">
+            <h1 className="text-3xl font-bold text-foreground tracking-wide">
               {clientConfig.app.name}
             </h1>
 
-            <p className="text-slate-400 text-sm">
+            <p className="text-muted-foreground text-sm">
               Plateforme anonyme de contenus digitaux
             </p>
 
