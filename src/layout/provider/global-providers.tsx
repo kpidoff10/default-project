@@ -1,11 +1,12 @@
 "use client";
 
 import { AuthProvider } from "@/providers/auth-provider";
+import { FilesProvider } from "@/providers/files-provider";
 import { NextIntlClientProvider } from "next-intl";
+import { QueryProvider } from "@/providers/query-provider";
 import { ReactNode } from "react";
 import { SessionUpdater } from "@/components/providers/session-updater";
 import { ThemeProvider } from "@/providers/theme-provider";
-import { QueryProvider } from "@/providers/query-provider";
 import { Toaster } from "sonner";
 
 interface GlobalProvidersProps {
@@ -30,7 +31,9 @@ export function GlobalProviders({
       <AuthProvider>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <SessionUpdater />
-          <QueryProvider>{children}</QueryProvider>
+          <QueryProvider>
+            <FilesProvider>{children}</FilesProvider>
+          </QueryProvider>
           <Toaster />
         </NextIntlClientProvider>
       </AuthProvider>

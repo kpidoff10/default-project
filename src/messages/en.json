@@ -260,6 +260,32 @@
       "result": {
         "success": "Test email sent successfully! Template: {template}, Email: {email}"
       }
+    },
+    "UploadTest": {
+      "title": "R2 Upload Test",
+      "description": "Generate a presigned URL and upload a file with progress tracking.",
+      "form": {
+        "file": { "label": "File" },
+        "folder": {
+          "label": "Folder",
+          "placeholder": "Select a folder",
+          "content": "Content",
+          "blurred": "Blurred content"
+        },
+        "buttons": {
+          "upload": "Upload",
+          "uploading": "Uploading...",
+          "cancel": "Cancel"
+        },
+        "progress": "Progress"
+      },
+      "result": { "publicUrl": "Public URL" },
+      "success": { "uploaded": "File uploaded successfully" },
+      "errors": {
+        "noFile": "No file selected",
+        "server": "Server error",
+        "upload": "Error during upload"
+      }
     }
   },
   "Auth": {
