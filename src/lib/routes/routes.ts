@@ -11,8 +11,7 @@ export class RouteManager {
     // Page d'accueil
     {
       path: "/",
-      label: "Accueil",
-      description: "Page d'accueil",
+      labelKey: "home",
       public: true,
       requiresAuth: false,
       showInNav: false,
@@ -144,8 +143,8 @@ export class RouteManager {
     
     return navRoutes.map(route => ({
       path: route.path,
-      label: route.label,
-      description: route.description,
+      label: route.labelKey,
+      description: route.descriptionKey,
       icon: route.icon,
     }));
   }

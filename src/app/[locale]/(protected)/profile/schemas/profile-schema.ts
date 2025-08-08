@@ -1,25 +1,34 @@
 import { z } from "zod";
 
-export const profileFormSchema = z.object({
-  firstName: z.string().max(50, {
-    message: "Le prénom ne peut pas dépasser 50 caractères.",
-  }).optional().or(z.literal("")),
-  lastName: z.string().max(50, {
-    message: "Le nom ne peut pas dépasser 50 caractères.",
-  }).optional().or(z.literal("")),
-  name: z.string().min(3, {
-    message: "Le nom d'utilisateur doit contenir au moins 3 caractères.",
-  }).max(30, {
-    message: "Le nom d'utilisateur ne peut pas dépasser 30 caractères.",
-  }).regex(/^[a-zA-Z0-9_-]+$/, {
-    message: "Le nom d'utilisateur ne peut contenir que des lettres, chiffres, tirets et underscores.",
-  }),
-  email: z.string().email({
-    message: "Veuillez entrer une adresse email valide.",
-  }),
-  bio: z.string().max(500, {
-    message: "La bio ne peut pas dépasser 500 caractères.",
-  }).optional().or(z.literal("")),
-});
+// Factory de schéma avec i18n
+export function createProfileFormSchema(
+  t: (key: string, values?: any) => string
+) {
+  return z.object({
+    firstName: z
+      .string()
+      .max(50, { message: t("Validation.Profile.firstName.max", { max: 50 }) })
+      .optional()
+      .or(z.literal("")),
+    lastName: z
+      .string()
+      .max(50, { message: t("Validation.Profile.lastName.max", { max: 50 }) })
+      .optional()
+      .or(z.literal("")),
+    name: z
+      .string()
+      .min(3, { message: t("Validation.Profile.name.min", { min: 3 }) })
+      .max(30, { message: t("Validation.Profile.name.max", { max: 30 }) })
+      .regex(/^[a-zA-Z0-9_-]+$/, {
+        message: t("Validation.Profile.name.regex"),
+      }),
+    email: z.string().email({ message: t("Validation.Profile.email.invalid") }),
+    bio: z
+      .string()
+      .max(500, { message: t("Validation.Profile.bio.max", { max: 500 }) })
+      .optional()
+      .or(z.literal("")),
+  });
+}
 
-export type ProfileFormData = z.infer<typeof profileFormSchema>; 
+export type ProfileFormData = z.infer<ReturnType<typeof createProfileFormSchema>>;

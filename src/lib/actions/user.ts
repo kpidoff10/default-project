@@ -1,12 +1,16 @@
 "use server";
 
 import { authActionClient } from "@/lib/create-safe-action";
-import { profileFormSchema } from "@/app/[locale]/(protected)/profile/schemas/profile-schema";
+import { createProfileFormSchema } from "@/app/[locale]/(protected)/profile/schemas/profile-schema";
+import { getTranslations } from "next-intl/server";
 import { prisma } from "@/lib/prisma";
 
 export const updateProfile = authActionClient
   .metadata({ actionName: "updateProfile" })
-  .inputSchema(profileFormSchema)
+  .inputSchema(async () => {
+    const t = await getTranslations();
+    return createProfileFormSchema(t);
+  })
   .action(async ({ parsedInput: data, ctx: { userId } }) => {
   
     // Mettre à jour l'utilisateur et sélectionner seulement les champs nécessaires

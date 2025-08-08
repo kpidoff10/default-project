@@ -287,5 +287,49 @@
         "general": "An error occurred"
       }
     }
+  },
+  "Common": {
+    "form": {
+      "saveChanges": "Save"
+    }
+  },
+  "Validation": {
+    "Profile": {
+      "firstName": {
+        "max": "First name cannot exceed {max} characters."
+      },
+      "lastName": {
+        "max": "Last name cannot exceed {max} characters."
+      },
+      "name": {
+        "min": "Username must be at least {min} characters.",
+        "max": "Username cannot exceed {max} characters.",
+        "regex": "Username may only contain letters, numbers, dashes and underscores."
+      },
+      "email": {
+        "invalid": "Please enter a valid email address."
+      },
+      "bio": {
+        "max": "Bio cannot exceed {max} characters."
+      }
+    },
+    "Auth": {
+      "email": {
+        "invalid": "Invalid email"
+      },
+      "password": {
+        "min": "Password must be at least {min} characters"
+      },
+      "name": {
+        "min": "Name must be at least {min} characters"
+      },
+      "username": {
+        "min": "Username must be at least {min} characters",
+        "regex": "Username may only contain letters, numbers and underscores"
+      },
+      "bio": {
+        "max": "Bio cannot exceed {max} characters"
+      }
+    }
   }
-} 
+}

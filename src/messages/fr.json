@@ -287,5 +287,49 @@
         "general": "Une erreur est survenue"
       }
     }
+  },
+  "Common": {
+    "form": {
+      "saveChanges": "Sauvegarder"
+    }
+  },
+  "Validation": {
+    "Profile": {
+      "firstName": {
+        "max": "Le prénom ne peut pas dépasser {max} caractères."
+      },
+      "lastName": {
+        "max": "Le nom ne peut pas dépasser {max} caractères."
+      },
+      "name": {
+        "min": "Le nom d'utilisateur doit contenir au moins {min} caractères.",
+        "max": "Le nom d'utilisateur ne peut pas dépasser {max} caractères.",
+        "regex": "Le nom d'utilisateur ne peut contenir que des lettres, chiffres, tirets et underscores."
+      },
+      "email": {
+        "invalid": "Veuillez entrer une adresse email valide."
+      },
+      "bio": {
+        "max": "La bio ne peut pas dépasser {max} caractères."
+      }
+    },
+    "Auth": {
+      "email": {
+        "invalid": "Email invalide"
+      },
+      "password": {
+        "min": "Le mot de passe doit contenir au moins {min} caractères"
+      },
+      "name": {
+        "min": "Le nom doit contenir au moins {min} caractères"
+      },
+      "username": {
+        "min": "Le nom d'utilisateur doit contenir au moins {min} caractères",
+        "regex": "Le nom d'utilisateur ne peut contenir que des lettres, chiffres et underscores"
+      },
+      "bio": {
+        "max": "La bio ne peut pas dépasser {max} caractères"
+      }
+    }
   }
-} 
+}
