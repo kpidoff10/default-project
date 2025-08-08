@@ -194,6 +194,11 @@
     "header": {
       "changeCover": "Change Cover",
       "changePhoto": "Change Photo"
+    },
+    "coverUpload": {
+      "title": "Drop your cover image",
+      "description": "Click or drag & drop an image to upload",
+      "maxSize": "Max size: {max}MB"
     }
   },
   "Emails": {

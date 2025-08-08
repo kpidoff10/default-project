@@ -35,7 +35,6 @@ const buttonVariants = cva(
     defaultVariants: {
       variant: "default",
       size: "default",
-    
     },
   }
 );
@@ -46,6 +45,7 @@ interface ButtonProps
   asChild?: boolean;
   tooltip?: string;
   isLoading?: boolean;
+  startIcon?: React.ReactNode;
 }
 
 function Button({
@@ -57,37 +57,31 @@ function Button({
   isLoading = false,
   children,
   disabled,
+  startIcon,
   ...props
 }: ButtonProps) {
   const Comp = asChild ? Slot : "button";
-  
+
   // Rendu du contenu avec gestion du loading
   const renderContent = () => {
     if (isLoading) {
-      // Si c'est un bouton avec icône, on remplace juste l'icône
-      const hasIcon = React.Children.toArray(children).some(
-        (child) => React.isValidElement(child) && child.type === 'svg'
+      // Toujours afficher le spinner avant le libellé
+      return (
+        <span className="inline-flex items-center">
+          <Loader2 className="h-4 w-4 animate-spin mr-2" />
+          {children}
+        </span>
       );
-      
-      if (hasIcon) {
-        return (
-          <>
-            <Loader2 className="h-4 w-4 animate-spin" />
-            {React.Children.map(children, (child) => {
-              if (React.isValidElement(child) && child.type !== 'svg') {
-                return child;
-              }
-              return null;
-            })}
-          </>
-        );
-      }
-      
-      // Sinon on remplace tout le contenu
-      return <Loader2 className="h-4 w-4 animate-spin" />;
     }
-    
-    return children;
+
+    return startIcon ? (
+      <span className="inline-flex items-center">
+        {startIcon}
+        {children}
+      </span>
+    ) : (
+      children
+    );
   };
 
   const buttonElement = (

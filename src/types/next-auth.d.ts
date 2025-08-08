@@ -6,7 +6,7 @@ declare module "next-auth" {
     user: User
   }
 
-  type UserSession  = Pick<UserPrisma, "id" | "email" | "name" | "image" | "role" | "firstName" | "lastName" | "bio">
+  type UserSession  = Pick<UserPrisma, "id" | "email" | "name" | "image" | "coverImage" | "role" | "firstName" | "lastName" | "bio">
 }
 
 declare module "next-auth/jwt" {

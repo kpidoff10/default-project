@@ -48,9 +48,9 @@ export async function isUserExists(email: string) {
 /**
  * Vérifie si un nom d'utilisateur existe
  */
-export async function isUsernameExists(username: string) {
-  const user = await prisma.user.findUnique({
-    where: { username }
+export async function isUsernameExists(name: string) {
+  const user = await prisma.user.findFirst({
+    where: { name }
   });
   return !!user;
 } 

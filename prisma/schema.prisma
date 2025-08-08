@@ -57,6 +57,7 @@ model User {
   email         String   @unique
   emailVerified DateTime?
   image         String?
+  coverImage    String? // Photo de couverture de l'utilisateur
   password      String? // Pour l'authentification email/mot de passe
   role          UserRole  @default(USER)
   bio           String    @default("")

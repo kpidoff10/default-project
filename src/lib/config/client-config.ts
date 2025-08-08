@@ -25,6 +25,7 @@ export const clientConfig = {
     },
   },
 
+
   // Configuration de la sécurité (côté client)
   security: {
     sessionMaxAge: 30 * 24 * 60 * 60, // 30 jours

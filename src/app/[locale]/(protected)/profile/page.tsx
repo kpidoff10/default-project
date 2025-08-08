@@ -48,7 +48,7 @@ export default function ProfilePage() {
   return (
     <MainCard>
       {/* En-tête avec image de couverture et photo de profil */}
-      <ProfileHeader userImage={user?.image} userName={user?.name} />
+      <ProfileHeader userImage={user?.image} userCover={user?.coverImage} />
 
       {/* Contenu principal avec onglets */}
 

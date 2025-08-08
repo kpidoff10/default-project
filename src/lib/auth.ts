@@ -4,11 +4,11 @@ import FacebookProvider from "next-auth/providers/facebook";
 import GoogleProvider from "next-auth/providers/google";
 import { NextAuthOptions } from "next-auth";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { UserSession } from "next-auth";
 import bcrypt from "bcryptjs";
+import { getServerSession } from "next-auth";
 import { prisma } from "./prisma";
 import { serverConfig } from "./config/server-config";
-import { getServerSession } from "next-auth";
-import { UserSession } from "next-auth";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -76,6 +76,8 @@ export const authOptions: NextAuthOptions = {
           id: user.id,
           email: user.email || "",
           name: user.name || "",
+          image: user.image || "",
+          coverImage: user.coverImage || "",
           role: user.role,
         };
       },
@@ -91,13 +93,8 @@ export const authOptions: NextAuthOptions = {
         // Récupérer l'utilisateur complet depuis la base de données
         fullUser = await prisma.user.findUnique({
           where: { id: user.id },
-          select: { id: true, role: true, firstName: true, lastName: true, bio: true }
+          select: { id: true, role: true, firstName: true, lastName: true, bio: true, image: true, coverImage: true }
         });
-        
-        if (fullUser) {
-          session.user.id = fullUser.id;
-          session.user.role = fullUser.role;
-        }
       }
       return {
         ...session,

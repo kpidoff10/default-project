@@ -194,6 +194,11 @@
     "header": {
       "changeCover": "Changer la couverture",
       "changePhoto": "Changer la photo"
+    },
+    "coverUpload": {
+      "title": "Déposez votre image de couverture",
+      "description": "Cliquez ou glissez-déposez une image pour la téléverser",
+      "maxSize": "Taille max: {max} Mo"
     }
   },
   "Emails": {

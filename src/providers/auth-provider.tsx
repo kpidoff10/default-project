@@ -13,9 +13,9 @@ import {
   signOut,
   useSession,
 } from "next-auth/react";
+import { User, UserSession } from "next-auth";
 
 import SplashScreen from "@/components/ui/splash-screen";
-import { User, UserSession } from "next-auth";
 
 interface AuthContextType {
   user: UserSession | null;
@@ -25,7 +25,7 @@ interface AuthContextType {
   isAdmin: boolean;
   isCreator: boolean;
   signOut: (options?: SignOutParams) => Promise<void>;
-  updateUser: (user: UserSession) => void;
+  updateUser: (user: Partial<UserSession>) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -43,9 +43,10 @@ function AuthProviderInner({ children }: { children: ReactNode }) {
   const isAdmin = userRole === "admin";
   const isCreator = userRole === "creator" || isAdmin;
 
-  const updateUser = (updatedUser: User) => {
+  const updateUser = (updatedUser: Partial<UserSession>) => {
     // Mettre à jour l'utilisateur local sans déclencher le loading
-    setLocalUser(updatedUser);
+    console.log("updatedUser", updatedUser);
+    setLocalUser((prev) => ({ ...prev, ...updatedUser }) as User);
   };
 
   // Gérer l'affichage du splash screen avec un délai minimum de 2 secondes
@@ -66,8 +67,6 @@ function AuthProviderInner({ children }: { children: ReactNode }) {
   if (isLoading || showSplash) {
     return <SplashScreen />;
   }
-
-
 
   const value: AuthContextType = {
     user: localUser || session?.user || null,

@@ -22,8 +22,8 @@ export default function SaveButton({
           disabled={isDisabled}
           isLoading={isLoading}
           size="lg"
+          startIcon={<Save className="h-5 w-5 mr-2" />}
         >
-          <Save className="h-5 w-5 mr-2" />
           {t("form.saveChanges")}
         </Button>
       </div>
