@@ -1,11 +1,13 @@
 "use server";
 
-import { updateProfileCoverInput, updateProfileImageInput } from "../../validations/user";
+import { changePasswordInput, updateProfileCoverInput, updateProfileImageInput } from "../../validations/user";
 
+import { ActionError } from "@/lib/create-safe-action";
 import { authActionClient } from "@/lib/create-safe-action";
 import { createProfileFormSchema } from "@/app/[locale]/(protected)/profile/schemas/profile-schema";
 import { getTranslations } from "next-intl/server";
 import { prisma } from "@/lib/prisma";
+import { z } from "zod";
 
 export const updateProfile = authActionClient
   .metadata({ actionName: "updateProfile" })
@@ -78,4 +80,47 @@ export const updateProfileImage = authActionClient
     });
 
     return updatedUser;
+  });
+
+export const changePassword = authActionClient
+  .metadata({ actionName: "changePassword" })
+  .inputSchema(changePasswordInput)
+  .action(async ({ parsedInput: { currentPassword, newPassword }, ctx: { userId } }) => {
+    // Vérifier le mot de passe actuel
+    const user = await prisma.user.findUnique({ where: { id: userId } });
+    if (!user || !user.password) {
+      throw new ActionError("Utilisateur introuvable");
+    }
+    const bcrypt = await import("bcryptjs");
+    const isValid = await bcrypt.compare(currentPassword, user.password);
+    if (!isValid) {
+      throw new ActionError("Mot de passe actuel invalide");
+    }
+
+    // Mettre à jour le mot de passe
+    const hashed = await bcrypt.hash(newPassword, 10);
+    await prisma.user.update({ where: { id: userId }, data: { password: hashed } });
+
+    return { success: true };
+  });
+
+export const getPasswordEligibility = authActionClient
+  .metadata({ actionName: "getPasswordEligibility" })
+  .inputSchema(z.undefined())
+  .action(async ({ ctx: { userId } }) => {
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { id: true, password: true, accounts: { select: { provider: true } } },
+    });
+
+    if (!user) {
+      return { canChangePassword: false, reason: "Utilisateur introuvable", providers: [] as string[] };
+    }
+
+    const providers = (user.accounts || []).map((a) => a.provider);
+    const hasPassword = !!user.password;
+    const canChangePassword = hasPassword;
+    const reason = hasPassword ? null : "Compte sans mot de passe local (OAuth)";
+
+    return { canChangePassword, reason, providers };
   });

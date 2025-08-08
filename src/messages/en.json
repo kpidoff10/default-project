@@ -183,7 +183,12 @@
       "changePassword": {
         "title": "Change Password",
         "description": "Update your password",
-        "edit": "Edit"
+        "edit": "Edit",
+        "current": "Current password",
+        "new": "New password",
+        "confirm": "Confirm password",
+        "mismatch": "Passwords do not match",
+        "oauth": "Session not managed (OAuth)"
       },
       "activeSessions": {
         "title": "Active Sessions",

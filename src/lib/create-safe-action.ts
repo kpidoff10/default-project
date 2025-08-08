@@ -1,12 +1,13 @@
 import {
-    createSafeActionClient,
     DEFAULT_SERVER_ERROR_MESSAGE,
-  } from "next-safe-action";
-  import { cookies } from "next/headers";
-  import { z } from "zod";
+    createSafeActionClient,
+} from "next-safe-action";
+
+import { cookies } from "next/headers";
 import { getAuthSession } from "./auth";
-  
-  class ActionError extends Error {}
+import { z } from "zod";
+
+export class ActionError extends Error {}
   
   // Base client.
   const actionClient = createSafeActionClient({
@@ -18,7 +19,7 @@ import { getAuthSession } from "./auth";
     handleServerError(e) {
       console.error("Action error:", e.message);
   
-      if (e instanceof ActionError) {
+       if (e instanceof ActionError) {
         return e.message;
       }
   

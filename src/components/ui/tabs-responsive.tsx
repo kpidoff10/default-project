@@ -80,17 +80,14 @@ function TabsResponsive({
     enter: {
       opacity: 0,
       x: 20,
-      scale: 0.95,
     },
     center: {
       opacity: 1,
       x: 0,
-      scale: 1,
     },
     exit: {
       opacity: 0,
       x: -20,
-      scale: 0.95,
     },
   };
 
@@ -151,7 +148,7 @@ function TabsResponsive({
       {/* Render content with TransitionPanel */}
       <TransitionPanel
         activeIndex={activeIndex}
-        className="mt-4"
+        className="mt-4 overflow-hidden"
         variants={variants}
         transition={{
           type: "spring",

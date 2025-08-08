@@ -8,16 +8,27 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Monitor, Shield } from "lucide-react";
+import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { ChangePasswordDialog } from "@/components/ui/change-password-dialog";
 import { Separator } from "@/components/ui/separator";
 import { SessionsDialog } from "@/components/sessions/sessions-dialog";
-import { useState } from "react";
+import { usePasswordEligibility } from "@/hooks/use-profile";
 import { useTranslations } from "next-intl";
 
 export function SecurityTab() {
   const t = useTranslations("Profile");
   const [sessionsDialogOpen, setSessionsDialogOpen] = useState(false);
+  const {
+    mutate: checkEligibility,
+    data: eligibility,
+    isPending,
+  } = usePasswordEligibility();
+
+  useEffect(() => {
+    checkEligibility();
+  }, [checkEligibility]);
 
   return (
     <>
@@ -39,9 +50,18 @@ export function SecurityTab() {
                 {t("security.changePassword.description")}
               </p>
             </div>
-            <Button variant="outline" size="sm">
-              {t("security.changePassword.edit")}
-            </Button>
+            <ChangePasswordDialog>
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={eligibility && !eligibility.canChangePassword}
+                isLoading={isPending}
+              >
+                {eligibility && !eligibility.canChangePassword
+                  ? t("security.changePassword.oauth")
+                  : t("security.changePassword.edit")}
+              </Button>
+            </ChangePasswordDialog>
           </div>
 
           <Separator />

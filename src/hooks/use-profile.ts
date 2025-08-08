@@ -1,6 +1,6 @@
 "use client";
 
-import { updateProfile, updateProfileCover, updateProfileImage } from "@/lib/actions/protected/user";
+import { changePassword, getPasswordEligibility, updateProfile, updateProfileCover, updateProfileImage } from "@/lib/actions/protected/user";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { ProfileFormData } from "@/app/[locale]/(protected)/profile/schemas/profile-schema";
@@ -123,6 +123,32 @@ export function useUpdateProfileCover() {
     onError: (error) => {
       console.error("Erreur lors de la mise à jour de l'image:", error);
       toast.error(error.message || t("form.errorSaving"));
+    },
+  });
+}
+
+export function useChangePassword() {
+  const t = useTranslations("Profile");
+  return useMutation({
+    mutationFn: async (data: { currentPassword: string; newPassword: string; confirmPassword: string }) => {
+      const result = await changePassword(data);
+      if (result.validationErrors) {
+        throw new Error(Object.values(result.validationErrors).join(", "));
+      }
+      if (result.serverError) {
+        throw new Error(result.serverError);
+      }
+      return result.data;
+    },
+  });
+}
+
+export function usePasswordEligibility() {
+  return useMutation({
+    mutationFn: async () => {
+      const result = await getPasswordEligibility(undefined);
+      if (result.serverError) throw new Error(result.serverError);
+      return result.data as { canChangePassword: boolean; reason: string | null; providers: string[] };
     },
   });
 }
