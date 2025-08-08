@@ -7,8 +7,8 @@ import { ArrowUp, Loader2 } from "lucide-react";
 import { Button } from "./button";
 import { cn } from "@/lib/utils";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useVirtualizer } from "@tanstack/react-virtual";
 import { useTranslations } from "next-intl";
+import { useVirtualizer } from "@tanstack/react-virtual";
 
 // Composant unifié pour l'animation de transformation
 function UnifiedPullToRefreshIndicator({
@@ -19,7 +19,7 @@ function UnifiedPullToRefreshIndicator({
   onRefresh: () => void;
 }) {
   const t = useTranslations("VirtualList.refresh");
-  
+
   return (
     <div className="w-full mb-2 pt-2 md:pt-0">
       <div
@@ -64,13 +64,25 @@ interface VirtualListProps<T> {
   height?: number | string;
 
   // Hauteur de chaque élément
-  itemHeight: number;
+  itemHeight?: number;
+
+  // Active la hauteur dynamique (mesure automatique de chaque ligne)
+  useDynamicRowHeight?: boolean;
+
+  // Clé stable pour chaque élément (améliore les perfs du virtualizer)
+  getItemKey?: (item: T, index: number) => string | number;
+
+  // Espacement vertical entre éléments (en px)
+  itemGap?: number;
 
   // Classes CSS personnalisées
   className?: string;
 
   // Élément de chargement personnalisé
   loadingComponent?: React.ReactNode;
+
+  // Nombre d'éléments de chargement à afficher
+  loadingCount?: number;
 
   // Élément vide personnalisé
   emptyComponent?: React.ReactNode;
@@ -109,19 +121,24 @@ export function VirtualList<T>({
   itemHeight,
   className,
   loadingComponent,
+  loadingCount = 6,
   emptyComponent,
   errorComponent,
   onLoadMore,
-  hasMore,  
+  hasMore,
   isLoading,
   isLoadingMore,
   onRefresh,
   isRefreshing,
   disablePullToRefresh = false,
+  useDynamicRowHeight = false,
+  getItemKey: getItemKeyProp,
+  itemGap = 0,
 }: VirtualListProps<T>) {
   const parentRef = React.useRef<HTMLDivElement>(null);
   const [showScrollToTop, setShowScrollToTop] = React.useState(false);
   const t = useTranslations("VirtualList");
+  const resolvedItemHeight = itemHeight ?? 56;
 
   // Mode 1: Données directes
   const isDataMode = data !== undefined;
@@ -162,7 +179,19 @@ export function VirtualList<T>({
   const rowVirtualizer = useVirtualizer({
     count: currentHasMore ? allItems.length + 1 : allItems.length,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => itemHeight,
+    estimateSize: () => {
+      // Estimation utilisée avant mesure réelle (ou en mode fixe)
+      return resolvedItemHeight + itemGap;
+    },
+    getItemKey: (index) =>
+      index >= allItems.length
+        ? `__loader_${index}`
+        : getItemKeyProp
+          ? getItemKeyProp(allItems[index], index)
+          : index,
+    measureElement: useDynamicRowHeight
+      ? (el: HTMLElement) => el.getBoundingClientRect().height
+      : undefined,
     overscan: 5,
   });
 
@@ -226,11 +255,25 @@ export function VirtualList<T>({
   // États de rendu
   if (currentIsLoading) {
     return (
-      <div className={cn("flex items-center justify-center p-4", className)}>
-        {loadingComponent || (
-          <div className="flex items-center space-x-2">
-            <Loader2 className="h-4 w-4 animate-spin" />
-            <span className="text-sm text-muted-foreground">{t("loading")}</span>
+      <div className={cn("w-full", className)}>
+        {loadingComponent ? (
+          // Si un loadingComponent personnalisé est fourni, l'afficher plusieurs fois
+          <div className="space-y-2">
+            {Array.from({ length: loadingCount }).map((_, index) => (
+              <div key={index} style={{ paddingBottom: itemGap }}>
+                {loadingComponent}
+              </div>
+            ))}
+          </div>
+        ) : (
+          // Fallback par défaut
+          <div className="flex items-center justify-center p-4">
+            <div className="flex items-center space-x-2">
+              <Loader2 className="h-4 w-4 animate-spin" />
+              <span className="text-sm text-muted-foreground">
+                {t("loading")}
+              </span>
+            </div>
           </div>
         )}
       </div>
@@ -242,9 +285,7 @@ export function VirtualList<T>({
       <div className={cn("flex items-center justify-center p-4", className)}>
         {errorComponent || (
           <div className="text-center">
-            <p className="text-destructive text-sm">
-              {t("error.title")}
-            </p>
+            <p className="text-destructive text-sm">{t("error.title")}</p>
             {currentError && (
               <p className="text-xs text-muted-foreground mt-1">
                 {currentError.message}
@@ -316,9 +357,18 @@ export function VirtualList<T>({
                     top: 0,
                     left: 0,
                     width: "100%",
-                    height: `${itemHeight}px`,
+                    // En mode dynamique on laisse le contenu définir la hauteur mesurée
+                    height: useDynamicRowHeight
+                      ? undefined
+                      : `${resolvedItemHeight + itemGap}px`,
+                    paddingBottom: itemGap,
                     transform: `translateY(${virtualRow.start}px)`,
                   }}
+                  ref={
+                    useDynamicRowHeight
+                      ? rowVirtualizer.measureElement
+                      : undefined
+                  }
                 >
                   {isLoaderRow ? (
                     <div className="flex items-center justify-center p-4">
@@ -365,9 +415,18 @@ export function VirtualList<T>({
                       top: 0,
                       left: 0,
                       width: "100%",
-                      height: `${itemHeight}px`,
+                      // En mode dynamique on laisse le contenu définir la hauteur mesurée
+                      height: useDynamicRowHeight
+                        ? undefined
+                        : `${resolvedItemHeight + itemGap}px`,
+                      paddingBottom: itemGap,
                       transform: `translateY(${virtualRow.start}px)`,
                     }}
+                    ref={
+                      useDynamicRowHeight
+                        ? rowVirtualizer.measureElement
+                        : undefined
+                    }
                   >
                     {isLoaderRow ? (
                       <div className="flex items-center justify-center p-4">

@@ -13,6 +13,7 @@ import Link from "next/link";
 import { LocaleSwitcher } from "./locale-switcher";
 import Logo from "./logo";
 import { Menu } from "lucide-react";
+import { NotificationBell } from "./notification-bell";
 import { OAuthNavButtons } from "./oauth-nav-buttons";
 import { PopoverResponsive } from "@/components/ui/popover-responsive";
 import { Route } from "@/lib/routes/types";
@@ -105,14 +106,19 @@ export function TopNav() {
           <LocaleSwitcher />
           <ThemeToggle />
           <div className="w-px h-6 bg-border" />
+          <NotificationBell />
+
           <AuthButtons />
         </div>
 
         {/* Mobile Menu */}
         <div className="md:hidden flex items-center">
           {isAuthenticated && (
-            <div className="mr-2">
-              <AuthAvatar />
+            <div className="flex items-center space-x-4">
+              <NotificationBell />
+              <div className="mr-2">
+                <AuthAvatar />
+              </div>
             </div>
           )}
 

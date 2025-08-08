@@ -41,7 +41,7 @@ export function SecurityTab() {
           <CardDescription>{t("security.description")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="flex items-center justify-between p-4 border rounded-lg">
+          <div className="flex flex-col gap-3 p-4 border rounded-lg sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h4 className="font-medium">
                 {t("security.changePassword.title")}
@@ -66,7 +66,7 @@ export function SecurityTab() {
 
           <Separator />
 
-          <div className="flex items-center justify-between p-4 border rounded-lg">
+          <div className="flex flex-col gap-3 p-4 border rounded-lg sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h4 className="font-medium">
                 {t("security.activeSessions.title")}

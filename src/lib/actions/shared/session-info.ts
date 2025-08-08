@@ -133,7 +133,7 @@ async function getCountryFromIP(): Promise<string | null> {
     });
     
     if (!response.ok) {
-      throw new Error('Erreur lors de la récupération du pays');
+      return null;
     }
     
     const data = await response.json();

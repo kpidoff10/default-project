@@ -2,7 +2,9 @@
 
 import { AuthProvider } from "@/providers/auth-provider";
 import { FilesProvider } from "@/providers/files-provider";
+import { MomentProvider } from "@/providers/moment-provider";
 import { NextIntlClientProvider } from "next-intl";
+import { NotificationsProvider } from "@/providers/notifications-provider";
 import { QueryProvider } from "@/providers/query-provider";
 import { ReactNode } from "react";
 import { SessionUpdater } from "@/components/providers/session-updater";
@@ -31,10 +33,14 @@ export function GlobalProviders({
       <AuthProvider>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <SessionUpdater />
-          <QueryProvider>
-            <FilesProvider>{children}</FilesProvider>
-          </QueryProvider>
-          <Toaster />
+          <MomentProvider>
+            <QueryProvider>
+              <NotificationsProvider>
+                <FilesProvider>{children}</FilesProvider>
+              </NotificationsProvider>
+            </QueryProvider>
+          </MomentProvider>
+          <Toaster position="top-right" richColors closeButton expand />
         </NextIntlClientProvider>
       </AuthProvider>
     </ThemeProvider>

@@ -7,7 +7,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip";
 import { Loader2 } from "lucide-react";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all hover:cursor-pointer disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
   {
     variants: {
       variant: {
@@ -65,7 +65,11 @@ function Button({
   // Rendu du contenu avec gestion du loading
   const renderContent = () => {
     if (isLoading) {
-      // Toujours afficher le spinner avant le libellé
+      // Si pas d'enfants (juste une icône), centrer le spinner
+      if (!children) {
+        return <Loader2 className="h-4 w-4 animate-spin" />;
+      }
+      // Sinon afficher le spinner avant le libellé
       return (
         <span className="inline-flex items-center">
           <Loader2 className="h-4 w-4 animate-spin mr-2" />

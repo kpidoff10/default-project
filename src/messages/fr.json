@@ -300,6 +300,31 @@
       }
     }
   },
+  "NotificationsBell": {
+    "title": "Notifications",
+    "empty": "Aucune notification non lue",
+    "viewAll": "Voir toutes les notifications",
+    "markAll": "Tous marquer comme vues"
+  },
+  "NotificationsPage": {
+    "title": "Notifications",
+    "markAll": "Tous marquer comme vues",
+    "empty": "Aucune notification",
+    "recent": "Récentes",
+    "markOne": "Marquer comme vue",
+    "loadMore": "Charger plus"
+  },
+  "AdminNotifications": {
+    "title": "Tester l'envoi de notification",
+    "description": "Envoyer une notification USER à un utilisateur via Ably"
+  },
+  "Notifications": {
+    "USER": {
+      "title": "Notification utilisateur",
+      "body": "Nouvelle notification disponible"
+    },
+    "view": "Voir"
+  },
   "Auth": {
     "login": {
       "title": "Connexion",

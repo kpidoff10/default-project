@@ -34,6 +34,9 @@ export const env = createEnv({
     
     // Logging
     LOG_LEVEL: z.enum(["debug", "info", "warn", "error"]).default("info"),
+
+    // Ably
+    ABLY_API_KEY: z.string().min(1).optional(),
   },
   client: {
     // Variables accessibles côté client
@@ -59,6 +62,7 @@ export const env = createEnv({
     R2_BUCKET_NAME: process.env.R2_BUCKET_NAME,
     R2_PUBLIC_URL: process.env.R2_PUBLIC_URL,
     LOG_LEVEL: process.env.LOG_LEVEL,
+    ABLY_API_KEY: process.env.ABLY_API_KEY,
     
     // Client
     NEXT_PUBLIC_APP_NAME: process.env.NEXT_PUBLIC_APP_NAME,

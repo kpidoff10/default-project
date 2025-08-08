@@ -47,6 +47,11 @@ export const serverConfig = {
   logging: {
     level: env.LOG_LEVEL,
   },
+
+  // Configuration Ably
+  ably: {
+        apiKey: env.ABLY_API_KEY,
+      },
 } as const;
 
 // Types pour la configuration côté serveur

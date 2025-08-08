@@ -298,6 +298,31 @@
       }
     }
   },
+  "NotificationsBell": {
+    "title": "Notifications",
+    "empty": "No unread notifications",
+    "viewAll": "View all notifications",
+    "markAll": "Mark all as read"
+  },
+  "NotificationsPage": {
+    "title": "Notifications",
+    "markAll": "Mark all as read",
+    "empty": "No notifications",
+    "recent": "Recent",
+    "markOne": "Mark as read",
+    "loadMore": "Load more"
+  },
+  "AdminNotifications": {
+    "title": "Test notification sending",
+    "description": "Send a USER notification to a user via Ably"
+  },
+  "Notifications": {
+    "USER": {
+      "title": "User notification",
+      "body": "New notification available"
+    },
+    "view": "View"
+  },
   "Auth": {
     "login": {
       "title": "Login",
