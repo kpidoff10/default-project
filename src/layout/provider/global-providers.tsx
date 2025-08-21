@@ -10,6 +10,7 @@ import { ReactNode } from "react";
 import { SessionUpdater } from "@/components/providers/session-updater";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { Toaster } from "sonner";
+import { CookieConsent } from "@/components/ui/cookie-consent";
 
 interface GlobalProvidersProps {
   children: ReactNode;
@@ -36,7 +37,10 @@ export function GlobalProviders({
           <MomentProvider>
             <QueryProvider>
               <NotificationsProvider>
-                <FilesProvider>{children}</FilesProvider>
+                <FilesProvider>
+                  {children}
+                  <CookieConsent />
+                </FilesProvider>
               </NotificationsProvider>
             </QueryProvider>
           </MomentProvider>

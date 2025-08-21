@@ -25,6 +25,8 @@ interface PopoverResponsiveProps {
   className?: string;
   side?: "top" | "right" | "bottom" | "left";
   align?: "start" | "center" | "end";
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
 export function PopoverResponsive({
@@ -34,12 +36,14 @@ export function PopoverResponsive({
   className,
   side = "bottom",
   align = "center",
+  open,
+  onOpenChange,
 }: PopoverResponsiveProps) {
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   if (isDesktop) {
     return (
-      <Popover>
+      <Popover open={open} onOpenChange={onOpenChange}>
         <PopoverTrigger asChild>{trigger}</PopoverTrigger>
         <PopoverContent
           className={cn("w-80", className)}
@@ -53,7 +57,7 @@ export function PopoverResponsive({
   }
 
   return (
-    <Drawer>
+    <Drawer open={open} onOpenChange={onOpenChange}>
       <DrawerTrigger asChild>{trigger}</DrawerTrigger>
       <DrawerContent className="h-auto max-h-[60vh]">
         <DrawerHeader className="pb-4">

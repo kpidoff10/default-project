@@ -186,7 +186,7 @@ function DialogResponsiveFooter({
 
   // Mobile: Render as div with pt-5 for buttons and border-top separator
   return (
-    <div className={`${className} pt-5 border-t border-border`}>{children}</div>
+    <div className={`${className} pt-5 pb-3 border-t border-border`}>{children}</div>
   );
 }
 

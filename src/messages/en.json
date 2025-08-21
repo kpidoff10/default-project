@@ -60,6 +60,25 @@
       "support": "Support"
     }
   },
+  "Cookies": {
+    "title": "Cookie Management",
+    "description": "We use cookies to improve your experience on our site.",
+    "acceptAll": "Accept all cookies",
+    "acceptNecessary": "Essential cookies only",
+    "customize": "Customize",
+    "learnMore": "Learn more",
+    "necessary": "Essential cookies",
+    "necessaryDescription": "These cookies are necessary for the website to function.",
+    "analytics": "Analytics cookies",
+    "analyticsDescription": "These cookies help us understand how you use our site.",
+    "marketing": "Marketing cookies",
+    "marketingDescription": "These cookies are used to provide you with personalized content.",
+    "save": "Save",
+    "cancel": "Cancel",
+    "preferences": "Preferences",
+    "preferencesDescription": "Manage your cookie preferences",
+    "iconTooltip": "Manage cookies"
+  },
   "AuthMenu": {
     "upload": "Publish",
     "myContent": "My Content",
