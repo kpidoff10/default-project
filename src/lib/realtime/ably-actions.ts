@@ -15,7 +15,18 @@ export const getAblyToken = authActionClient
     if (!serverConfig.ably.apiKey.includes(":")) {
       throw new Error("ABLY_API_KEY invalide. Format attendu: 'keyId:keySecret'.");
     }
-    const ably = new Ably.Rest({ key: serverConfig.ably.apiKey, queryTime: true });
+    
+    // Configuration Ably sans cache pour éviter les problèmes keyv
+    const ably = new Ably.Rest({ 
+      key: serverConfig.ably.apiKey, 
+      queryTime: true,
+      // Désactiver le cache pour éviter les conflits keyv
+      restHost: undefined,
+      realtimeHost: undefined,
+      port: undefined,
+      tlsPort: undefined,
+    });
+    
     const tokenRequest = await ably.auth.createTokenRequest({ clientId: userId || undefined });
     return { tokenRequest };
   });
